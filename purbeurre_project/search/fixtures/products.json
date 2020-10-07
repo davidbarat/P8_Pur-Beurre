@@ -1,0 +1,42 @@
+[
+    {
+        "model": "search.products",
+        "pk": 1,
+        "fields": {
+            "barcode": "",
+            "categories": "",
+            "product_name": "",
+            "resume": "Snacks",
+            "picture_path": "Snacks",
+            "nutriscore_grade": ""
+        }
+    },
+    {
+        "model": "search.products",
+        "pk": 2,
+        "fields": {
+            "category_name": "Boissons"
+        }
+    },
+    {
+        "model": "search.products",
+        "pk": 3,
+        "fields": {
+            "category_name": "Produits Laitiers"
+        }
+    },
+    {
+        "model": "search.products",
+        "pk": 4,
+        "fields": {
+            "category_name": "Produits à tartiner"
+        }
+    },
+    {
+        "model": "search.products",
+        "pk": 5,
+        "fields": {
+            "category_name": "Fromages"
+        }
+    }
+]

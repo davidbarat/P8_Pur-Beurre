@@ -1,8 +1,11 @@
-from django.conf.urls import url
+# from django.conf.urls import url
+from django.conf.urls import include, url
+from django.contrib import admin
+from search import views
 
-from . import views # import views so we can use them in urls.
-
+from . import views
 
 urlpatterns = [
-    # "/store" will call the method "index" in "views.py"
+    # url(r'^$', views.index),
+    url(r'^$', views.listing, name='listing'),
 ]

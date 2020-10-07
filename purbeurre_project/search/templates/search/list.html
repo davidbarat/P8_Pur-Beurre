@@ -1,0 +1,23 @@
+{% for product in products %}
+<div class="col-sm-4 text-center">
+    {{ product }}
+    <a href="{{ product.barcode }}">
+        <img class="img-responsive" src="{{ product.picture_path }}" alt="{{ product.product_name }}">
+    </a>
+</div>
+{% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+{% endfor %}
+
+{% if paginate %}
+<div class="clearfix"></div>
+<nav aria-label="">
+    <ul class="pager">
+        {% if products.has_previous %}
+        <li><a href="?page={{ products.previous_page_number }}">Précédent</a></li>
+        {% endif %}
+        {% if products.has_next %}
+        <li><a href="?page={{ products.next_page_number }}">Suivant</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}

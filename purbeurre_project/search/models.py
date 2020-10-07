@@ -1,33 +1,41 @@
 from django.db import models
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
+
 
 # Create your models here.
 
-class Categories(models.Model):
+class Category(models.Model):
     category_name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.category_name
 
 
-class User(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email_address = models.EmailField(max_length=50)
+class User(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length=50, unique=True, default='David')
+    email = models.EmailField(max_length=50, default='dav.barat@gmail.com')
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    password = models.CharField(max_length=30, blank=True)
+
+    USERNAME_FIELD = 'username'
 
 
-class Products(models.Model):
-    categories = models.OneToOneField(
-        Categories,
+class Product(models.Model):
+    category = models.ForeignKey(Category,
         on_delete=models.DO_NOTHING
     )
-    resume = models.CharField(max_length=200)
+    barcode = models.BigIntegerField()
+    product_name = models.CharField(max_length=100, default="na")
+    resume = models.CharField(max_length=1000)
     picture_path = models.URLField()
-    nutriscore_grade = models.CharField(max_length=1)
+    nutriscore_grade = models.CharField(max_length=2)
 
 
 class Substitute(models.Model):
     products_barcode = models.OneToOneField(
-        Products,
+        Product,
         primary_key=True,
         on_delete=models.DO_NOTHING
     )
