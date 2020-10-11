@@ -81,15 +81,15 @@ class Command(BaseCommand):
                         self.data['products'][j]['nutriscore_grade'] = 'na'
                     if not 'ingredients_text_fr' in self.data['products'][j]:
                         self.data['products'][j]['ingredients_text_fr'] = 'na'
-                    if not 'image_nutrition_small_url' in self.data['products'][j]:
-                        self.data['products'][j]['image_nutrition_small_url'] = 'na'
+                    if not 'image_front_thumb_url' in self.data['products'][j]:
+                        self.data['products'][j]['image_front_thumb_url'] = 'na'
                     self.list_product.append(
                         (self.data['products'][j]['code'],
                         self.idx,
                         self.data['products'][j]['product_name'],
                         self.data['products'][j]['ingredients_text_fr'],
                         self.data['products'][j]['nutriscore_grade'],
-                        self.data['products'][j]['image_nutrition_small_url']
+                        self.data['products'][j]['image_front_thumb_url']
                         )
                     )
 

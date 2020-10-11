@@ -27,3 +27,21 @@ def listing(request):
         'paginate': True
     }
     return render(request, 'search/list_all.html', context)
+
+def search(request):
+    template = loader.get_template('search/form.html')
+    return HttpResponse(template.render(request=request))   
+
+def searching(request):
+    query = request.GET.get('query')
+    if not query:
+        products = Product.objects.all()
+    else:
+        products = Product.objects.filter(product_name__icontains=query)
+    if not products.exists():
+        message = "No Products found!"
+    
+    context = {
+        'products': products
+    }
+    return render(request, 'search/search.html', context)

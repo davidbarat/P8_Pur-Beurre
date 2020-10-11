@@ -1,12 +1,20 @@
-{% for product in products %}
-<div class="col-sm-4 text-center">
-    {{ product }}
+{% include 'search/form.html' %}
+
+<div class="row">
+    {% for product in products %}
+    <div class="col-sm-4 text-center">
+    </div>
     <a href="{{ product.barcode }}">
         <img class="img-responsive" src="{{ product.picture_path }}" alt="{{ product.product_name }}">
     </a>
+    <!-- <h3><a href="{{ product.product_name }}">{{ product.product_name }}</a></h3> -->
 </div>
-{% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+{% if forloop.counter|divisibleby:3 %}
+<div class="clearfix"></div>
+{% endif %}
 {% endfor %}
+</div>
+
 
 {% if paginate %}
 <div class="clearfix"></div>
