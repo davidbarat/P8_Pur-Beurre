@@ -6,9 +6,7 @@ from search import views
 from . import views
 
 urlpatterns = [
-    # url(r'^$', views.index),
     url(r'^$', views.listing, name='listing'),
-    # url(r'^$', views.searching, name='searching'),
     url(r'^search/$', views.searching, name='search'),
-    # url(r'^$', views.searching, name='search'),
+    url(r'^create_user/$', views.create_user, name='create_user'),
 ]
