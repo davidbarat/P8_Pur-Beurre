@@ -58,11 +58,11 @@ def create_user(request):
             # process the data in form.cleaned_data as required
             if form.cleaned_data:
                 post = User()
-                form.username = request.POST.get('username')
-                form.email = request.POST.get('email')
-                form.first_name = request.POST.get('first_name')
-                form.last_name = request.POST.get('last_name')
-                form.password = request.POST.get('password')
+                post.username = request.POST.get('username')
+                post.email = request.POST.get('email')
+                post.first_name = request.POST.get('first_name')
+                post.last_name = request.POST.get('last_name')
+                post.password = request.POST.get('password')
                 post.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/search/')

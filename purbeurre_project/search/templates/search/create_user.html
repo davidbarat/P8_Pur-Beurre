@@ -3,7 +3,13 @@
 {% block content %}
 <form action=" {% url 'create_user' %}" method="post">
     {% csrf_token %}
-    {{ form }}
+    {# form #}
+
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.label_tag }} {{ field }}
+    </div>
+    {% endfor %}
     <input type="submit" value="OK">
 </form>
 {% endblock %}
