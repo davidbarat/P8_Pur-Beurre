@@ -4,7 +4,7 @@ from django.template import loader
 from search.models import Product, Category, User
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
-from .forms import AccountForm
+from .forms import UserForm
 
 
 def index(request):
@@ -48,11 +48,12 @@ def searching(request):
     }
     return render(request, 'search/search.html', context)
 
-def create_user(request):
+def login(request):
+
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = AccountForm(request.POST)
+        form = UserForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -69,6 +70,36 @@ def create_user(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = AccountForm()
+        form = UserForm()
 
-    return render(request, 'create_user.html', {'form': form}) 
+    return render(request, 'login.html', {'form': form})
+
+def register(request):
+
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        if user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            registered = True
+        else:
+            print(user_form.errors)
+    else:
+        user_form = UserForm()
+    return render(request,'registration.html',
+                          {'user_form':user_form,
+                           'registered':registered})
+
+def profile(request, username=None):
+      if username:
+        post_owner = get_object_or_404(User, username=username)
+
+      else:
+        post_owner = request.user
+
+      args1 = {
+        'post_owner': post_owner,
+      }
+      return render(request, 'profile.html', args1)

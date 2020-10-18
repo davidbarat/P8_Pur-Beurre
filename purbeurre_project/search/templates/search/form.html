@@ -1,12 +1,16 @@
-<div class="container">
-    <div class="col-lg-12 detail-separator">
-        <form class="col-md-6 col-md-offset-3 text-center" action="{% url 'search' %}" method="get"
-            accept-charset="utf-8">
-            <div class="form-group">
-                <label for="searchForm">Product Search</label>
-                <input id="searchForm" class="form-control" name="query">
+<section class="page-section bg-secondary" id="form">
+    <div class="container">
+        <div class="col-lg-12 detail-separator">
+            <div class="col-md-3">
             </div>
-            <span class="help-block" id="helpBlock">Find your favorite fat product</span>
-        </form>
+            <form class="col-md-6 col-md-offset-3 text-center" action="{% url 'search' %}" method="get"
+                accept-charset="utf-8">
+                <div class="form-group">
+                    <label for="searchForm">Product Search</label>
+                    <input id="searchForm" class="form-control" name="query">
+                </div>
+                <span class="help-block" id="helpBlock">Find your favorite fat product</span>
+            </form>
+        </div>
     </div>
-</div>
+</section>

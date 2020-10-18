@@ -8,5 +8,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.listing, name='listing'),
     url(r'^search/$', views.searching, name='search'),
-    url(r'^create_user/$', views.create_user, name='create_user'),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^profile/$', views.profile, name='profile'),
 ]

@@ -1,7 +1,12 @@
 {% extends 'search/base.html' %}
 
 {% block content %}
-<form action=" {% url 'create_user' %}" method="post">
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form action=" {% url 'login' %}" method="post">
     {% csrf_token %}
     {# form #}
 
@@ -10,6 +15,6 @@
         {{ field.label_tag }} {{ field }}
     </div>
     {% endfor %}
-    <input type="submit" value="OK">
+    <input type="submit" value="login">
 </form>
 {% endblock %}

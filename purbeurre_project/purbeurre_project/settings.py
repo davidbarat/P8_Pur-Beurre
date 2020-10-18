@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
+LOGIN_REDIRECT_URL = '/search/profile/'
 ROOT_URLCONF = 'purbeurre_project.urls'
 
 TEMPLATES = [
@@ -90,6 +91,8 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = ('search.models.EmailBackend',)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -109,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'search.User'
+# AUTH_USER_MODEL = ''
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
