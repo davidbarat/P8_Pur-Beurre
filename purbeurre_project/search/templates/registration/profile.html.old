@@ -9,7 +9,6 @@
     <h2>Register or Login if you'd like to</h2>
     {% endif %}
 </div>
-
 {% include 'search/form.html' %}
 
 {% endblock %}

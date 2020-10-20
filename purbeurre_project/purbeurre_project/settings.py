@@ -53,7 +53,9 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-LOGIN_REDIRECT_URL = '/search/profile/'
+# LOGIN_REDIRECT_URL = '/search/profile/'
+LOGIN_REDIRECT_URL = '/'
+
 ROOT_URLCONF = 'purbeurre_project.urls'
 
 TEMPLATES = [
