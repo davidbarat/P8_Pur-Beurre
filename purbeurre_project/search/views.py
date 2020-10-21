@@ -42,11 +42,24 @@ def searching(request):
         products = Product.objects.filter(product_name__icontains=query)
     if not products.exists():
         message = "No Products found!"
+
+    paginator = Paginator(products, 9)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        products = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        products = paginator.page(paginator.num_pages)
     
     context = {
-        'products': products
+        'products': products,
+        'query': query,
+        'paginate': True
     }
-    return render(request, 'search/search.html', context)
+    return render(request, 'search/list.html', context)
 
 def login(request):
 

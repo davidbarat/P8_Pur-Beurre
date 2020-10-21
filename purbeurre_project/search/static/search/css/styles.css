@@ -10168,3 +10168,19 @@ header.masthead h1 {
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75);
 }
+.notify-badge{
+    position: absolute;
+    right:-20px;
+    top:10px;
+    background:red;
+    text-align: center;
+    border-radius: 30px 30px 30px 30px;
+    color:white;
+    padding:5px 10px;
+    font-size:20px;
+    }
+    .item {
+    position:relative;
+    padding-top:20px;
+    display:inline-block;
+}
