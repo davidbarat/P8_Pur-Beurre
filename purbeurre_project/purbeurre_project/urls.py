@@ -20,6 +20,7 @@ from search import views
 
 urlpatterns = [
     url(r'^$', views.index),
+    url(r'^mentions/', views.mentions),
     url(r'^search/', include('search.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('django.contrib.auth.urls')),

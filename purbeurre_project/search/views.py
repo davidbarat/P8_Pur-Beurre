@@ -36,25 +36,31 @@ def search(request):
 
 def searching(request):
     query = request.GET.get('query')
+    products_nutriscore = "d"
+
     if not query:
         products = Product.objects.all()
     else:
-        products = Product.objects.filter(product_name__icontains=query)
-    if not products.exists():
+        products = Product.objects.filter(product_name__icontains=query)[:1]
+        # products_nutriscore = products.nutriscore_grade
+        products_nutriscore = "d"
+    if not products.exists():   
         message = "No Products found!"
 
-    paginator = Paginator(products, 9)
+    substitutes = Product.objects.filter(nutriscore_grade__lt=products_nutriscore)
+    paginator = Paginator(substitutes, 9)
     page = request.GET.get('page')
     try:
-        products = paginator.page(page)
+        substitutes = paginator.page(page)
     except PageNotAnInteger:
         # If page is not an integer, deliver first page.
-        products = paginator.page(1)
+        substitutes = paginator.page(1)
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
-        products = paginator.page(paginator.num_pages)
+        substitutes = paginator.page(paginator.num_pages)
     
     context = {
+        'substitutes': substitutes,
         'products': products,
         'query': query,
         'paginate': True
@@ -106,6 +112,7 @@ def register(request):
                            'registered':registered})
 
 def profile(request, username=None):
+
       if username:
         post_owner = get_object_or_404(User, username=username)
 
@@ -116,3 +123,7 @@ def profile(request, username=None):
         'post_owner': post_owner,
       }
       return render(request, 'profile.html', args1)
+
+def mentions(request):
+    template = loader.get_template('search/mentions.html')
+    return HttpResponse(template.render(request=request))

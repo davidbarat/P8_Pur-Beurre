@@ -3,21 +3,37 @@
 {% block content %}
 <section class="page-section bg-white" id="produit">
     <div class="container">
-        <h3>Votre recherche : {{ query }}</h3>
+        <div class="row justify-content-center">
+            {% for product in products %}
+            <h3>Votre recherche : {{ query }}</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="item">
+                <img class="img-responsive" src="{{ product.picture_path }}" alt="{{ product.product_name }}">
+                <span class="notify-badge">{{ product.nutriscore_grade }}</span>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </section>
 
+
 <section class="page-section bg-secondary" id="list">
     <div class="container">
+        <div class="row justify-content-center">
+            <h3>Vous pouvez remplacer cet aliment par:</h3>
+        </div>
+
         <div class="row">
-            {% for product in products %}
+            {% for substitute in substitutes %}
             <div class="col-sm-4 text-center">
                 <div class="item">
-                    <a href="{{ product.barcode }}">
-                        <img class="img-responsive" src="{{ product.picture_path }}" alt="{{ product.product_name }}">
-                        <span class="notify-badge">{{ product.nutriscore_grade }}</span>
+                    <a href="{{ substitute.barcode }}">
+                        <img class="img-responsive" src="{{ substitute.picture_path }}"
+                            alt="{{ substitute.product_name }}">
+                        <span class="notify-badge">{{ substitute.nutriscore_grade }}</span>
                     </a>
-                    <p>{{ product.product_name }}</p>
+                    <p>{{ substitute.product_name }}</p>
                 </div>
             </div>
             {% if forloop.counter|divisibleby:3 %}
@@ -29,11 +45,11 @@
         <div class="clearfix"></div>
         <nav aria-label="">
             <ul class="pager">
-                {% if products.has_previous %}
-                <li><a href="?page={{ products.previous_page_number }}">Précédent</a></li>
+                {% if substitutes.has_previous %}
+                <li><a href="?page={{ substitutes.previous_page_number }}">Précédent</a></li>
                 {% endif %}
-                {% if products.has_next %}
-                <li><a href="?page={{ products.next_page_number }}">Suivant</a></li>
+                {% if substitutes.has_next %}
+                <li><a href="?page={{ substitutes.next_page_number }}">Suivant</a></li>
                 {% endif %}
             </ul>
         </nav>

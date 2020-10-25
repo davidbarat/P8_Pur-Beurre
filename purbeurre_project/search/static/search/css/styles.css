@@ -3917,7 +3917,8 @@ input[type=button].btn-block {
   text-decoration: none;
 }
 .nav-link.disabled {
-  color: #6c757d;
+  /* color: #6c757d; */
+  color:black;
   pointer-events: none;
   cursor: default;
 }
@@ -10167,6 +10168,10 @@ header.masthead h1 {
 
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75);
+}
+
+.text-black {
+  color: black;
 }
 .notify-badge{
     position: absolute;
