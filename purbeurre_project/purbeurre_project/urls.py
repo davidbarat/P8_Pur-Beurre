@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.urls import include, path
 from search import views
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^mentions/', views.mentions),
+    path('mentions/', include('search.urls')),
     url(r'^search/', include('search.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('django.contrib.auth.urls')),

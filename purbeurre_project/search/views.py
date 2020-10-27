@@ -127,3 +127,15 @@ def profile(request, username=None):
 def mentions(request):
     template = loader.get_template('search/mentions.html')
     return HttpResponse(template.render(request=request))
+
+def detail(request, barcode):
+    # product = get_object_or_404(Product, pk=barcode)
+    products = Product.objects.filter(barcode__icontains=barcode)[:1]
+    for product in products:
+        context = {
+            'product_name': product.product_name,
+            'detail_product': product.resume,
+            'product_grade': product.nutriscore_grade,
+            'product_pic': product.picture_path
+        }
+    return render(request, 'search/detail.html', context)

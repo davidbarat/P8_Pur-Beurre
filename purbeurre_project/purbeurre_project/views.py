@@ -7,6 +7,3 @@ def index(request):
     # return HttpResponse(message)
     return HttpResponse(template.render(request=request))
 
-def mentions(request):
-    template = loader.get_template('search/mentions.html')
-    return HttpResponse(template.render(request=request))

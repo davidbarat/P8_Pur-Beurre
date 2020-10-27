@@ -25,9 +25,10 @@ SECRET_KEY = 'w25jxj=r+u^6*1%_vu1#j4a6t#1_6ks4hbpj$llg_p^**9fr$s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
+
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
