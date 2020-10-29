@@ -1,20 +1,26 @@
 {% extends 'search/base.html' %}
 
 {% block content %}
-<section class="page-section bg-white" id="produit">
-    <div class="container">
+
+<style>
+    section {
+        background-image: url('{{ product.picture_path }}');
+    }
+</style>
+
+<section class="page-section bg-black" id="produit">
+    {% for product in products %}
+    <div style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%),url('{{ product.small_picture_path }}'); background-repeat:no-repeat;
+    background-size:cover; text-shadow: white 0px 0px 2px; object-fit: fill; background-position: center;"
+        class="container">
         <div class="row justify-content-center">
-            {% for product in products %}
-            <h3>Votre recherche : {{ query }}</h3>
+            <h3>
+                <div class="col-md-6 text-center text-white">
+                    <p>{{ query }}</p>
+                </div>
+            </h3>
         </div>
-        <div class="row justify-content-center">
-            <div class="item">
-                <img class="img-responsive" src="{{ product.picture_path }}" alt="{{ product.product_name }}">
-                <span class="notify-badge">{{ product.nutriscore_grade }}</span>
-                <p><a href="" action="">Détail du Produit</a></p>
-                {% endfor %}
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </section>
 
@@ -30,11 +36,13 @@
             <div class="col-sm-4 text-center">
                 <div class="item">
                     <a href="{{ substitute.barcode }}">
-                        <img class="img-responsive" src="{{ substitute.picture_path }}"
+                        <img class="img-responsive" src="{{ substitute.small_picture_path }}"
                             alt="{{ substitute.product_name }}">
                         <span class="notify-badge">{{ substitute.nutriscore_grade }}</span>
                     </a>
                     <p>{{ substitute.product_name }}</p>
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Sauvegardez</a>
+
                 </div>
             </div>
             {% if forloop.counter|divisibleby:3 %}

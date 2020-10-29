@@ -27,19 +27,21 @@
     <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
-                <div class="  navbar-collapse" id="navbarResponsive">
-                    <img src="../../static/search/img/logo.png" width="75" height="50">
+                <div class="navbar-collapse" id="navbarResponsive">
+                    <img src="{% static 'search/img/logo.png' %}" width="75" height="50">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger text-black"
                             href="{% url 'index' %}">Purbeurre</a>
                     </li>
-                    {% include 'search/smallform.html' %}
-                    <ul class=" navbar-nav ml-auto my-2 my-lg-0">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                        <li class="nav-item">
+                            {% include 'search/smallform.html' %}
+                        </li class="nav-item">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger text-black"
                                 href="{% url 'login' %}">Mon
                                 Compte</a></li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#services"><img
-                                    src="../../static/search/img/Carrot.png" width="45" height="45"
+                                    src="{% static 'search/img/Carrot.png' %}" width="45" height="45"
                                     alt="Mes Aliments"></a>
                         </li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger text-black" href="
@@ -62,7 +64,8 @@
             <div class="row justify-content-center">
                 <a class="nav-link js-scroll-trigger" href="{% url 'mentions' %}">
                     Mentions Légales ©
-                    2020</a>
+                    2020 |</a>
+                <a class="nav-link js-scroll-trigger" href="{% url 'index' %}"> Contacts</a>
             </div>
         </div>
     </footer>

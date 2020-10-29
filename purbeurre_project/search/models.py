@@ -34,7 +34,10 @@ class Product(models.Model):
     product_name = models.CharField(max_length=100, default="na")
     resume = models.CharField(max_length=1000)
     picture_path = models.URLField()
+    small_picture_path = models.URLField()
     nutriscore_grade = models.CharField(max_length=2)
+    url = models.URLField()
+
 
 
 class Substitute(models.Model):

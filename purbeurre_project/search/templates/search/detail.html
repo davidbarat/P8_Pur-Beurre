@@ -1,17 +1,33 @@
 {% extends 'search/base.html' %}
 
 {% block content %}
-<hr>
-<h1 class="intro-text text-center">{{ product_name }}</h1>
-<hr class="detail-separator">
-<div class="col-md-6">
-    <img src="{{ thumbnail }}" alt="{{ product_name }}" class="img-responsive">
-</div>
-<div class="col-md-6">
-    <div style="margin-bottom:45px">
-        <h2 class="text-center artist_name">Product</h2>
-        <p>{{ product_name }}</p>
-    </div>
-</div>
 
+<section class="page-section" id="product_name">
+    <div style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%),url('{{ product_pic }}'); background-repeat:no-repeat;
+    background-size:cover; text-shadow: white 0px 0px 2px; object-fit: fill; background-position: center;"
+        class="container">
+        <div class="row justify-content-center">
+            <h3>
+                <div class="col-md-6 text-center text-white">
+                    <p>{{ product_name }}</p>
+                </div>
+            </h3>
+        </div>
+    </div>
+</section>
+<section class="page-section bg-white" id="detail">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <img src="{{ product_pic }}"></img>
+        </div>
+        <div class="col-md-6 text-center">
+            <p>{{ product_detail }}</p>
+            <p class="majuscules"> Nutriscore: {{ product_grade }}</p>
+            <a class="nav-link js-scroll-trigger" href="{{ product_url }}" target=”_blank”> Voir la fiche
+                d'OpenFoodFacts</a>
+        </div>
+    </div>
+
+    </div>
+</section>
 {% endblock %}

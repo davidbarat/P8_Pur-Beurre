@@ -36,7 +36,7 @@ def search(request):
 
 def searching(request):
     query = request.GET.get('query')
-    products_nutriscore = "d"
+    products_nutriscore = "d" # a revoir
 
     if not query:
         products = Product.objects.all()
@@ -134,8 +134,10 @@ def detail(request, barcode):
     for product in products:
         context = {
             'product_name': product.product_name,
-            'detail_product': product.resume,
+            'product_detail': product.resume,
             'product_grade': product.nutriscore_grade,
-            'product_pic': product.picture_path
+            'product_pic': product.picture_path,
+            'product_url': product.url,
+            'small_product_pic': product.small_picture_path
         }
     return render(request, 'search/detail.html', context)

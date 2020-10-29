@@ -36,6 +36,8 @@ class Command(BaseCommand):
                 resume = self.element[3],
                 nutriscore_grade = self.element[4],
                 picture_path = self.element[5],
+                url = self.element[6],
+                small_picture_path = self.element[7],
                 category = category
             )
             """ product.product_name = self.element[2]
@@ -81,15 +83,21 @@ class Command(BaseCommand):
                         self.data['products'][j]['nutriscore_grade'] = 'na'
                     if not 'ingredients_text_fr' in self.data['products'][j]:
                         self.data['products'][j]['ingredients_text_fr'] = 'na'
-                    if not 'image_front_thumb_url' in self.data['products'][j]:
-                        self.data['products'][j]['image_front_thumb_url'] = 'na'
+                    if not 'image_url' in self.data['products'][j]:
+                        self.data['products'][j]['image_url'] = 'na'
+                    if not 'image_small_url' in self.data['products'][j]:
+                        self.data['products'][j]['image_small_url'] = 'na'
+                    if not 'url' in self.data['products'][j]:
+                        self.data['products'][j]['url'] = 'na'
                     self.list_product.append(
                         (self.data['products'][j]['code'],
                         self.idx,
                         self.data['products'][j]['product_name'],
                         self.data['products'][j]['ingredients_text_fr'],
                         self.data['products'][j]['nutriscore_grade'],
-                        self.data['products'][j]['image_front_thumb_url']
+                        self.data['products'][j]['image_url'],
+                        self.data['products'][j]['url'],
+                        self.data['products'][j]['image_small_url']
                         )
                     )
 
