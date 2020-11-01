@@ -2,21 +2,18 @@
 
 {% block content %}
 
-<style>
-    section {
-        background-image: url('{{ product.picture_path }}');
-    }
-</style>
-
-<section class="page-section bg-black" id="produit">
-    {% for product in products %}
-    <div style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%),url('{{ product.small_picture_path }}'); background-repeat:no-repeat;
+{% for product in products %}
+<section class="page-section bg-white" style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%),url('{{ product.small_picture_path }}'); background-repeat:no-repeat;
     background-size:cover; text-shadow: white 0px 0px 2px; object-fit: fill; background-position: center;"
-        class="container">
+    id="produit">
+
+    <div class="container">
         <div class="row justify-content-center">
             <h3>
                 <div class="col-md-6 text-center text-white">
-                    <p>{{ query }}</p>
+                    <h3>
+                        <p>{{ query }}</p>
+                    </h3>
                 </div>
             </h3>
         </div>

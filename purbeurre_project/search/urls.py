@@ -1,5 +1,6 @@
 # from django.conf.urls import url
 from django.conf.urls import include, url
+from django.urls import path, re_path
 from django.contrib import admin
 from search import views
 from . import views
@@ -10,4 +11,6 @@ urlpatterns = [
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^mentions/$', views.mentions, name='mentions'),
     url(r'^search/(?P<barcode>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^logout/', views.logout2, name="logout2"),
+    url(r'^login/', views.login2, name="login2"),
 ]

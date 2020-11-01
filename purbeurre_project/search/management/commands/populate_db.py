@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from search.models import Product, Category
+from search.models import Product, Category, DetailProduct
 import requests
 
 
@@ -31,7 +31,7 @@ class Command(BaseCommand):
             # for self.unique in self.element:
             category = Category.objects.get(id=self.element[1])
             product, _  = Product.objects.get_or_create(
-                barcode=self.element[0],
+                barcode = self.element[0],
                 product_name = self.element[2],
                 resume = self.element[3],
                 nutriscore_grade = self.element[4],
@@ -40,12 +40,21 @@ class Command(BaseCommand):
                 small_picture_path = self.element[7],
                 category = category
             )
-            """ product.product_name = self.element[2]
-            product.resume = self.element[3]
-            product.nutriscore_grade = self.element[4]
-            product.picture_path = self.element[5]
-            product.category = self.element[1] """
             product.save()
+
+            detail_product, _  = DetailProduct.objects.get_or_create(
+                code = product,
+                energy_100g = self.element[8],
+                energy_unit = self.element[9],
+                proteins_100g = self.element[10],
+                fat_100g = self.element[11],
+                saturated_fat_100g = self.element[12],
+                carbohydrates_100g = self.element[13],
+                sugars_100g = self.element[14],
+                fiber_100g = self.element[15],
+                salt_100g = self.element[16]
+            )
+            detail_product.save()
                 
     def handle(self, *args, **options):
 
@@ -89,6 +98,25 @@ class Command(BaseCommand):
                         self.data['products'][j]['image_small_url'] = 'na'
                     if not 'url' in self.data['products'][j]:
                         self.data['products'][j]['url'] = 'na'
+                    if not 'energy_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['energy_100g'] = '00'
+                    if not 'energy_unit' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['energy_unit'] = 'na'
+                    if not 'proteins_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['proteins_100g'] = '00'
+                    if not 'fat_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['fat_100g'] = '00'
+                    if not 'saturated_fat_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['saturated_fat_100g'] = '00'
+                    if not 'carbohydrates_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['carbohydrates_100g'] = '00'
+                    if not 'sugars_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['sugars_100g'] = '00'
+                    if not 'fiber_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['fiber_100g'] = '00'
+                    if not 'salt_100g' in self.data['products'][j]['nutriments']:
+                        self.data['products'][j]['nutriments']['salt_100g'] = '00'
+
                     self.list_product.append(
                         (self.data['products'][j]['code'],
                         self.idx,
@@ -97,7 +125,16 @@ class Command(BaseCommand):
                         self.data['products'][j]['nutriscore_grade'],
                         self.data['products'][j]['image_url'],
                         self.data['products'][j]['url'],
-                        self.data['products'][j]['image_small_url']
+                        self.data['products'][j]['image_small_url'],
+                        self.data['products'][j]['nutriments']['energy_100g'],
+                        self.data['products'][j]['nutriments']['energy_unit'],
+                        self.data['products'][j]['nutriments']['proteins_100g'],
+                        self.data['products'][j]['nutriments']['fat_100g'],
+                        self.data['products'][j]['nutriments']['saturated_fat_100g'],
+                        self.data['products'][j]['nutriments']['carbohydrates_100g'],
+                        self.data['products'][j]['nutriments']['sugars_100g'],
+                        self.data['products'][j]['nutriments']['fiber_100g'],
+                        self.data['products'][j]['nutriments']['salt_100g']
                         )
                     )
 

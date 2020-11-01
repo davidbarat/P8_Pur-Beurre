@@ -24,7 +24,6 @@ urlpatterns = [
     path('mentions/', include('search.urls')),
     url(r'^search/', include('search.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^account/', include('django.contrib.auth.urls')),
     url(r'^register/$',views.register, name='register'),
 
 ]
