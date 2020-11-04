@@ -1,0 +1,44 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+<section class="page-section bg-white" style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%),url('/static/search/img/bg-masthead.jpg'); background-repeat:no-repeat;
+    background-size:cover; text-shadow: white 0px 0px 2px; object-fit: fill; background-position: center;"
+    id="produit">
+</section>
+
+<section class="page-section bg-white" id="list">
+    <div class="container">
+        <div class="row">
+            {% for myproduct in products %}
+            <div class="col-sm-4 text-center">
+                <div class="item">
+                    <a href="{{ myproduct.barcode }}">
+                        <img class="img-responsive" src="{{ myproduct.small_picture_path }}"
+                            alt="{{ myproduct.product_name }}">
+                        <span class="notify-badge">{{ myproduct.nutriscore_grade }}</span>
+                    </a>
+                    <p>{{ myproduct.product_name }}</p>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+            <div class="clearfix"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% if paginate %}
+        <div class="clearfix"></div>
+        <nav aria-label="">
+            <ul class="pager">
+                {% if myproduct.has_previous %}
+                <li><a href="?page={{ myproduct.previous_page_number }}">Précédent</a></li>
+                {% endif %}
+                {% if substitutes.has_next %}
+                <li><a href="?page={{ myproduct.next_page_number }}">Suivant</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

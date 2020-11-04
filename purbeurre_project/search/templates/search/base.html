@@ -37,7 +37,7 @@
                             {% include 'search/smallform.html' %}
                         </li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="text-black js-scroll-trigger" href="{% url 'login2' %}">Mon
+                        <li class="nav-item"><a class="text-black js-scroll-trigger" href="{% url 'profile' %}">Mon
                                 Compte</a></li>
                         {% endif %}
                         {% if not user.is_authenticated %}
@@ -47,7 +47,7 @@
                         {% endif %}
 
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#services"><img
+                            <a class="nav-link js-scroll-trigger" href="{% url 'myproducts' %}"><img
                                     src="{% static 'search/img/Carrot.png' %}" width="45" height="45"
                                     alt="Mes Aliments"></a>
                         </li>

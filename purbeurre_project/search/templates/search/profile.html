@@ -2,14 +2,19 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-<div class="page-section bg-secondary">
+
+<section class="page-section" style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%),url('/static/search/img/fond_ecran.jpg'); background-repeat:no-repeat;
+    background-size:cover; text-shadow: white 0px 0px 2px; object-fit: fill; background-position: center;"
+    id="profile">
+</section>
+<div class="container bg-white text-black text-center">
+    {% if user.is_authenticated %}
     <h2>Hello {{ user.username }}</h2>
+    <h2>{{ user.email }}</h2>
     {% else %}
-    <h2>Register or Login if you'd like to</h2>
+    <h2><a href="{% url 'accounts/login' %}">Register or Login if you'd like to</a></h2>
     {% endif %}
 </div>
 
-{% include 'search/form.html' %}
 
 {% endblock %}

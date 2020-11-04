@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .forms import UserForm, RegisterForm
-from search.models import Product, Category, User, DetailProduct
+from search.models import Product, Category, User, DetailProduct, Substitute
 
 
 def index(request):
@@ -99,7 +99,7 @@ def login2(request):
     else:
         form = UserForm()
 
-    return render(request, 'search/login.html', {'form': form})
+    return render(request, 'search/profile.html', {'form': form})
 
 def logout2(request):
 
@@ -113,10 +113,9 @@ def register(request):
     if request.method == 'POST':
         user_form = RegisterForm(data=request.POST)
         if user_form.is_valid():
-            user_form.save()
-            # user = user_form.save()
-            """ user.set_password(user.password)
-            user.save() """
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
             registered = True
         else:
             print(user_form.errors)
@@ -147,7 +146,7 @@ def mentions(request):
 def detail(request, barcode):
     # product = get_object_or_404(Product, pk=barcode)
     products = Product.objects.filter(barcode__icontains=barcode)[:1]
-    detail_products = DetailProduct.objects.filter(code_id__barcode__icontains=barcode)[:1]
+    detail_products = DetailProduct.objects.filter(id_id__barcode__icontains=barcode)[:1]
     for product in products:
         product_dict = {
             'product_name': product.product_name,
@@ -170,3 +169,36 @@ def detail(request, barcode):
 
     return render(request, 'search/detail.html', context)
 
+def myproducts(request):
+
+    user_email = None
+
+    if request.user.is_authenticated:
+        user_email = request.user.email
+
+    myproducts = Substitute.objects.filter(user__exact=request.email)
+    substitute_obj = Substitute.objects.create(
+            user_email=user_email, substitute_id=product_obj)
+
+    context = {
+        'myproducts': myproducts,
+        'paginate': True
+    }
+    return render(request, "myproducts.html", context)
+
+def save(request, id):
+
+    # id = request.GET.get('id')
+    user_email = None
+    product_obj = Product.objects.get(product_id__exact=id)
+    
+    if request.user.is_authenticated:
+        user_email = request.user.email
+
+    substitute_obj = Substitute.objects.create(
+            user_email=user_email, substitute_id=product_obj)
+    try:
+        substitute_obj.save()
+        return HttpResponse("SaveOK")
+    except:
+        return HttpResponse("SaveError")

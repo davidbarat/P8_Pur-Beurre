@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^search/', include('search.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^register/$',views.register, name='register'),
-
+    url(r"^accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:

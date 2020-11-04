@@ -7,31 +7,20 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.db.models import Q
 
 
-# Create your models here.
-
 class Category(models.Model):
     category_name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.category_name
 
-
-""" class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=50, unique=True, default='David')
-    email = models.EmailField(max_length=50, default='dav.barat@gmail.com')
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    password = models.CharField(max_length=30, blank=True)
-
-    USERNAME_FIELD = 'username' """
-
-
 class Product(models.Model):
     category = models.ForeignKey(Category,
         on_delete=models.DO_NOTHING
     )
-    barcode = models.BigIntegerField(primary_key = True)
-    product_name = models.CharField(max_length=100, default="na", primary_key = False)
+    product_id = models.AutoField(primary_key=True)
+    barcode = models.BigIntegerField()
+    product_name = models.CharField(
+        max_length=100, default="na", primary_key = False)
     resume = models.CharField(max_length=1000)
     picture_path = models.URLField()
     small_picture_path = models.URLField()
@@ -40,7 +29,12 @@ class Product(models.Model):
 
 
 class DetailProduct(models.Model):
-    code = models.OneToOneField(Product, to_field="barcode", primary_key = True, on_delete = models.CASCADE)
+
+    id = models.OneToOneField(
+        Product, 
+        to_field="product_id", 
+        primary_key = True, 
+        on_delete = models.CASCADE)
     energy_100g = models.DecimalField(max_digits=7, decimal_places=2)
     energy_unit = models.CharField(max_length=5)
     proteins_100g = models.DecimalField(max_digits=6, decimal_places=2)
@@ -53,17 +47,19 @@ class DetailProduct(models.Model):
 
 
 class Substitute(models.Model):
+
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    barcode_substitute = models.ForeignKey(Product, to_field="barcode", on_delete=models.CASCADE)
+    user_email = models.EmailField(
+        max_length=50, default='dav.barat@gmail.com')
+    substitute_id = models.ForeignKey(
+        Product, to_field="product_id", on_delete=models.CASCADE)
 
 
 class EmailBackend(ModelBackend):
+
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
             user = UserModel.objects.get(Q(email__iexact=username))   
-        except UserModel.DoesNotExist:
-            UserModel().set_password(password)
         except MultipleObjectsReturned:
             return User.objects.filter(email=username).order_by('id').first()
         else:

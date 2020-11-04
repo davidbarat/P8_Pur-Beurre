@@ -43,7 +43,7 @@ class Command(BaseCommand):
             product.save()
 
             detail_product, _  = DetailProduct.objects.get_or_create(
-                code = product,
+                id = product,
                 energy_100g = self.element[8],
                 energy_unit = self.element[9],
                 proteins_100g = self.element[10],

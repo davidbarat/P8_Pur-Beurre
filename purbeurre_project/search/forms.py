@@ -16,4 +16,4 @@ class UserForm(forms.ModelForm):
     class Meta():
         model = User
         # fields = ('email','password')
-        fields = ('email','password', 'first_name', 'last_name', 'username')
+        fields = ('username','password')

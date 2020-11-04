@@ -3,18 +3,15 @@
 {% block content %}
 
 {% load static %}
-
-<section class="page-section bg-white" id="login">
-    <div style="background-image: url('cookies.jpg' ); background-repeat:no-repeat;
-        background-size:cover; text-shadow: white 0px 0px 2px; object-fit: fill; background-position: center;object-fit:
-        fill;background-repeat: no-repeat;">
-    </div>
+<section style="background-image: url('/static/search/img/fond_ecran.jpg'); background-repeat:no-repeat;
+        background-size:cover; text-shadow: white 0px 0px 2px; background-position: center;object-fit:
+        fill;background-repeat: no-repeat;" class="page-section bg-white">
 </section>
 
-<section class="page-section bg-white" id="registration">
+<section class="page-section bg-white text-black" id="register">
     <div class="container">
         {% if registered %}
-        <h1>Thank you for registering!</h1>
+        <h1>Merci de vous êtes inscrit(e)</h1>
         {% else %}
         <h1>Enregistrez vous ici</h1>
         <h3>Remplissez le formulaire ci-dessous</h3>

@@ -94,7 +94,7 @@ DATABASES = {
     }
 }
 
-AUTHENTICATION_BACKENDS = ('search.models.EmailBackend')
+AUTHENTICATION_BACKENDS = ['search.models.EmailBackend']
 
 
 # Password validation
