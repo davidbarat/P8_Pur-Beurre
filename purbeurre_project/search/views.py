@@ -1,9 +1,11 @@
+import json
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -172,13 +174,21 @@ def detail(request, barcode):
 def myproducts(request):
 
     user_email = None
-
+    list_products = []
     if request.user.is_authenticated:
         user_email = request.user.email
 
-    myproducts = Substitute.objects.filter(user__exact=request.email)
-    substitute_obj = Substitute.objects.create(
-            user_email=user_email, substitute_id=product_obj)
+    mysubstitute_product_data = serializers.serialize("json", Substitute.objects.filter(
+        user_email__exact=user_email), fields=('substitute_id'))
+    mysubstitute_product_json = json.loads(mysubstitute_product_data)
+    # return HttpResponse(mysubstitute_product_data)
+    for product in mysubstitute_product_json:
+        list_products.append(product['fields']['substitute_id'])
+        # myproducts_list.append(Product.objects.filter(
+        #     product_id__exact=element))
+    # return HttpResponse(list_products)
+
+    myproducts = Product.objects.filter(product_id__in=list_products)
 
     context = {
         'myproducts': myproducts,
