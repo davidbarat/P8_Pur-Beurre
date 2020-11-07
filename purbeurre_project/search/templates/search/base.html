@@ -29,9 +29,9 @@
             <div class="container">
                 <div class="navbar-collapse" id="navbarResponsive">
                     <img src="{% static 'search/img/logo.png' %}" width="75" height="50">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger text-black"
+                    <ul class="nav-item"><a class="nav-link js-scroll-trigger text-black"
                             href="{% url 'index' %}">Purbeurre</a>
-                    </li>
+                    </ul>
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <li class="nav-item">
                             {% include 'search/smallform.html' %}
@@ -71,8 +71,10 @@
             <div class="row justify-content-center">
                 <a class="nav-link js-scroll-trigger" href="{% url 'mentions' %}">
                     Mentions Légales ©
-                    2020 |</a>
+                    2020 </a>
                 <a class="nav-link js-scroll-trigger" href="{% url 'index' %}"> Contacts</a>
+                <a class="nav-link js-scroll-trigger" href="https://github.com/davidbarat/P8_Pur-Beurre"> GitHub</a>
+
             </div>
         </div>
     </footer>

@@ -9,7 +9,7 @@
 </section>
 
 <section class="page-section bg-white text-black" id="register">
-    <div class="container">
+    <div class="container text-black">
         {% if registered %}
         <h1>Merci de vous êtes inscrit(e)</h1>
         {% else %}
@@ -19,7 +19,7 @@
             {% csrf_token %}
             {{ profile_form.as_p }}
             {{ user_form.as_p }}
-            <input type="submit" name="" value="Register">
+            <input type="submit" name="" value="Register" class="text-black">
         </form>
         {% endif %}
     </div>

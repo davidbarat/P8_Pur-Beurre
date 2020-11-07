@@ -10197,3 +10197,7 @@ header.masthead h1 {
 p.majuscules {
   text-transform: uppercase;
 }
+
+input[type="text"], textarea {
+  color: black;
+}

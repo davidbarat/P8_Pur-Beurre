@@ -7,8 +7,11 @@
     id="produit">
 </section>
 
-<section class="page-section bg-white" id="list">
-    <div class="container">
+<section class="page-section bg-white" id="message_save">
+    <div class="container center">
+        {% if message %}
+        <p>{{ message }}</p>
+        {%endif%}
         <div class="row">
             {% for myproduct in myproducts %}
             <div class="col-sm-4 text-center">

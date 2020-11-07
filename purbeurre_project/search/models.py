@@ -13,6 +13,7 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+
 class Product(models.Model):
     category = models.ForeignKey(Category,
         on_delete=models.DO_NOTHING

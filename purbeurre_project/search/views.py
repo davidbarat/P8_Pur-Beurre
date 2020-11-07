@@ -36,25 +36,26 @@ def listing(request):
     }
     return render(request, 'search/list_all.html', context)
 
-# @login_required()
+@login_required()
 def search(request):
     template = loader.get_template('search/form.html')
     return HttpResponse(template.render(request=request))   
 
-# @login_required()
+@login_required()
 def searching(request):
     query = request.GET.get('query')
-    products_nutriscore = "d" # a revoir
+    products_nutriscore = "d" # à revoir
     message = ""
+    products = ""
 
     if not query:
         message = "Remplissez le champ de recherche"
     else:
         products = Product.objects.filter(product_name__icontains=query)[:1]
         # products_nutriscore = products.nutriscore_grade
-        products_nutriscore = "d"
-    if not products.exists():   
-        message = "No Products found!"
+        products_nutriscore = "d" # à corriger
+    # if not products.exists():   
+    #     message = "No Products found!"
 
     substitutes = Product.objects.filter(nutriscore_grade__lt=products_nutriscore)
     paginator = Paginator(substitutes, 9)
@@ -144,9 +145,9 @@ def mentions(request):
     template = loader.get_template('search/mentions.html')
     return HttpResponse(template.render(request=request))
 
-# @login_required()
+@login_required()
 def detail(request, barcode):
-    # product = get_object_or_404(Product, pk=barcode)
+    # products = get_object_or_404(Product, pk=barcode)
     products = Product.objects.filter(barcode__icontains=barcode)[:1]
     detail_products = DetailProduct.objects.filter(id_id__barcode__icontains=barcode)[:1]
     for product in products:
@@ -209,6 +210,17 @@ def save(request, id):
             user_email=user_email, substitute_id=product_obj)
     try:
         substitute_obj.save()
-        return HttpResponse("SaveOK")
+        # return HttpResponse("SaveOK")
+        message = 'Le produit ' + product_obj.product_name + ' a bien été enregistré'
+        context = {
+        'message': message
+    }
+        return render(request, "myproducts.html", context)
+
     except:
-        return HttpResponse("SaveError")
+        # return HttpResponse("SaveError")
+        message = 'Il y a eu un problème lors de l enregistrement du produit ' + product_obj.product_name
+        context = {
+        'message': message
+    }
+        return render(request, "myproducts.html", context)

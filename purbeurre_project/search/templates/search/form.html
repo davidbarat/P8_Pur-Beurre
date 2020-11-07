@@ -8,6 +8,8 @@
                 <div class="form-group">
                     <input id="searchForm" class="form-control" name="query"
                         placeholder="Rechercher un produit bien gras">
+                    <button type="button" class="btn btn-light" action="{% url 'search' %}" method="get"
+                        id="searchbar">Remplacer</button>
                 </div>
                 {# endif #}
             </form>

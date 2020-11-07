@@ -10,13 +10,12 @@
 <div class="row justify-content-center">
     <div class="container">
         {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+        <p>Votre email et votre mot de passe ne correspondent pas. Veuillez ré-essayez.</p>
         {% endif %}
-
+        <p>Veuillez vous connecter : </p>
         <form method="post">
             {% csrf_token %}
             {# form #}
-
             {% for field in form %}
             <div class="fieldWrapper">
                 {{ field.label_tag }} {{ field }}
@@ -24,6 +23,10 @@
             {% endfor %}
             <input type="submit" value="login">
         </form>
+        <br>
+        <ul>Si vous n'avez pas de compte, enregistrez-vous<a class="nav-link js-scroll-trigger"
+                href="{% url 'register' %}"> ici
+            </a></ul>
     </div>
 </div>
 {% endblock %}
