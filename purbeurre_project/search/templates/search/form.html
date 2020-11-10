@@ -3,17 +3,16 @@
         <div class=row>
             <div class="col-md-3"></div>
             {# if user.is_authenticated #}
-            <form class="col-md-6 col-md-offset-3 text-center" action="{% url 'search' %}" method="get"
-                accept-charset="utf-8">
-                <div class="form-group">
+            <div class="col-md-6">
+                <form class="input-group" action="{% url 'search' %}" method="get" accept-charset="utf-8">
                     <input id="searchForm" class="form-control" name="query"
                         placeholder="Rechercher un produit bien gras">
-                    <button type="button" class="btn btn-light" action="{% url 'search' %}" method="get"
-                        id="searchbar">Remplacer</button>
-                </div>
-                {# endif #}
-            </form>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" id="searchbar">Remplacer</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
+        {# endif #}
     </div>
 </section>

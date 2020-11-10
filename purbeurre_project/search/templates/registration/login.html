@@ -12,7 +12,6 @@
         {% if form.errors %}
         <p>Votre email et votre mot de passe ne correspondent pas. Veuillez ré-essayez.</p>
         {% endif %}
-        <p>Veuillez vous connecter : </p>
         <form method="post">
             {% csrf_token %}
             {# form #}

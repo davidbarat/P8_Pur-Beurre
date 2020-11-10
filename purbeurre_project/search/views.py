@@ -44,34 +44,50 @@ def search(request):
 @login_required()
 def searching(request):
     query = request.GET.get('query')
-    products_nutriscore = "d" # à revoir
+    product_nutriscore = ""
+    product_category = 1
+    product_small_picture_path = ""
     message = ""
     products = ""
+    product_query_data = ""
+    product_query_json = {}
 
     if not query:
         message = "Remplissez le champ de recherche"
     else:
-        products = Product.objects.filter(product_name__icontains=query)[:1]
-        # products_nutriscore = products.nutriscore_grade
-        products_nutriscore = "d" # à corriger
+        # products = Product.objects.filter(product_name__icontains=query)[:1]
+        product_query_data = serializers.serialize(
+            "json", 
+            Product.objects.filter(
+                product_name__icontains=query)[:1], 
+                fields=('nutriscore_grade', 'category','small_picture_path'))
+        product_query_json = json.loads(product_query_data) 
+        for products in product_query_json:
+            product_nutriscore = products[
+                'fields']['nutriscore_grade']
+            product_category = products[
+                'fields']['category']
+            product_small_picture_path = products[
+                'fields']['small_picture_path']
+
     # if not products.exists():   
     #     message = "No Products found!"
 
-    substitutes = Product.objects.filter(nutriscore_grade__lt=products_nutriscore)
+    substitutes = Product.objects.filter(
+        nutriscore_grade__lt = product_nutriscore).filter(
+            category_id__exact = product_category)
     paginator = Paginator(substitutes, 9)
     page = request.GET.get('page')
     try:
         substitutes = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         substitutes = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
         substitutes = paginator.page(paginator.num_pages)
     
     context = {
         'substitutes': substitutes,
-        'products': products,
+        'product_small_picture_path': product_small_picture_path,
         'query': query,
         'paginate': True,
         'message': message
@@ -172,6 +188,7 @@ def detail(request, barcode):
 
     return render(request, 'search/detail.html', context)
 
+@login_required()
 def myproducts(request):
 
     user_email = None
@@ -197,6 +214,7 @@ def myproducts(request):
     }
     return render(request, "myproducts.html", context)
 
+@login_required()
 def save(request, id):
 
     # id = request.GET.get('id')
