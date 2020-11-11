@@ -7,20 +7,20 @@
         background-size:cover; text-shadow: white 0px 0px 2px; background-position: center;object-fit:
         fill;background-repeat: no-repeat;" class="page-section bg-white">
 </section>
-<div class="row justify-content-center">
+<div class="row justify-content-center text-black">
     <div class="container">
         {% if form.errors %}
         <p>Votre email et votre mot de passe ne correspondent pas. Veuillez ré-essayez.</p>
         {% endif %}
-        <form method="post">
+        <form method="post" class="text-black">
             {% csrf_token %}
             {# form #}
             {% for field in form %}
-            <div class="fieldWrapper">
+            <div class="fieldWrapper text-black">
                 {{ field.label_tag }} {{ field }}
             </div>
             {% endfor %}
-            <input type="submit" value="login">
+            <input type="submit" value="login" id="submit-login">
         </form>
         <br>
         <ul>Si vous n'avez pas de compte, enregistrez-vous<a class="nav-link js-scroll-trigger"

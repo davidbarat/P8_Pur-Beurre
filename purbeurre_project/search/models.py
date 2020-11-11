@@ -28,6 +28,9 @@ class Product(models.Model):
     nutriscore_grade = models.CharField(max_length=2)
     url = models.URLField()
 
+    def __str__(self):
+        return self.product_name
+
 
 class DetailProduct(models.Model):
 

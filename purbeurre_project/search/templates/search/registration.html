@@ -15,11 +15,11 @@
         {% else %}
         <h1>Enregistrez vous ici</h1>
         <h3>Remplissez le formulaire ci-dessous</h3>
-        <form enctype="multipart/form-data" method="POST">
+        <form enctype="multipart/form-data" method="POST" class="text-black">
             {% csrf_token %}
             {{ profile_form.as_p }}
             {{ user_form.as_p }}
-            <input type="submit" name="" value="Register" class="text-black">
+            <input type="submit" name="" value="Enregistrer" class="text-black">
         </form>
         {% endif %}
     </div>

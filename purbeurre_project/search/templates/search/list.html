@@ -35,8 +35,8 @@
                     </a>
                     <p>{{ substitute.product_name }}</p>
                     {% if user.is_authenticated %}
-                    <a class="btn btn-light btn-xl js-scroll-trigger" href="{% url 'save' id=substitute.product_id %}"
-                        method="post">Sauvegardez</a>
+                    <a class="btn btn-secondary btn-xl js-scroll-trigger"
+                        href="{% url 'save' id=substitute.product_id %}" method="post">Sauvegardez</a>
                     {% else %}
                     <span class="con-link">Connectez-vous pour sauvegarder</span>
                     {% endif %}
