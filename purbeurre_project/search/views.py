@@ -206,7 +206,17 @@ def myproducts(request):
         #     product_id__exact=element))
     # return HttpResponse(list_products)
 
-    myproducts = Product.objects.filter(product_id__in=list_products)
+    myproducts = Product.objects.filter(
+        product_id__in=list_products).order_by('product_id')
+
+    paginator = Paginator(myproducts, 9)
+    page = request.GET.get('page')
+    try:
+        myproducts = paginator.page(page)
+    except PageNotAnInteger:
+        myproducts = paginator.page(1)
+    except EmptyPage:
+        myproducts = paginator.page(paginator.num_pages)
 
     context = {
         'myproducts': myproducts,
@@ -217,7 +227,6 @@ def myproducts(request):
 @login_required()
 def save(request, id):
 
-    # id = request.GET.get('id')
     user_email = None
     product_obj = Product.objects.get(product_id__exact=id)
     

@@ -8,18 +8,17 @@
         fill;background-repeat: no-repeat;" class="page-section bg-white">
 </section>
 
-<section class="page-section bg-white text-black" id="register">
-    <div class="container text-black">
+<section class="page-section bg-white" id="register">
+    <div class="container">
         {% if registered %}
         <h1>Merci de vous êtes inscrit(e)</h1>
         {% else %}
-        <h1>Enregistrez vous ici</h1>
-        <h3>Remplissez le formulaire ci-dessous</h3>
-        <form enctype="multipart/form-data" method="POST" class="text-black">
+        <h1>Remplissez le formulaire ci-dessous :</h1>
+        <form enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             {{ profile_form.as_p }}
             {{ user_form.as_p }}
-            <input type="submit" name="" value="Enregistrer" class="text-black">
+            <input type="submit" name="" value="Enregistrer">
         </form>
         {% endif %}
     </div>

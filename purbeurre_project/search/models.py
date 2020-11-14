@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend, UserModel
 from django.core.exceptions import MultipleObjectsReturned
 from django.db.models import Q
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -30,6 +31,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+    def get_absolute_url(self):
+        return reverse('detail', args=[str(self.product_id)])
 
 
 class DetailProduct(models.Model):

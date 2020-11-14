@@ -37,12 +37,15 @@ class purBeurreTest(unittest.TestCase):
         self.elem.send_keys(Keys.RETURN)
         time.sleep(5)
 
-    def testMentions(self):
+    def testMentionsContacts(self):
         self.driver.maximize_window()
         self.driver.get(self.url)
         self.elem = self.driver.find_element_by_id("mentions")
         self.elem.send_keys(Keys.RETURN)
         time.sleep(5)
+        self.elem = self.driver.find_element_by_id("contact")
+        time.sleep(5)
+
 
     def tearDown(self):
         self.driver.quit()

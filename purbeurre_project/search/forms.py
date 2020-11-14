@@ -7,7 +7,6 @@ class RegisterForm(forms.ModelForm):
         max_length = 50, 
         widget = forms.TextInput(attrs={'style':'color:black', 'type':'text'}))
     password = forms.CharField(widget=forms.PasswordInput())
-
     username = forms.CharField(
         label='Nom d utilisateur',
         max_length=30,
@@ -28,6 +27,14 @@ class RegisterForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
+    username = forms.CharField(
+        label='Nom d utilisateur',
+        max_length=30,
+        widget = forms.TextInput(attrs={'style':'color:black', 'type':'text'}))
+    email = forms.EmailField(
+        label = 'Votre email', 
+        max_length = 50, 
+        widget = forms.TextInput(attrs={'style':'color:black', 'type':'text'}))
     password = forms.CharField(widget=forms.PasswordInput())
 
 
@@ -35,10 +42,3 @@ class UserForm(forms.ModelForm):
         model = User
         # fields = ('email','password')
         fields = ('username','password')
-        widgets= {
-            'email':forms.TextInput(attrs={'font':'black', 'type':'text'}),
-            'password':forms.TextInput(attrs={'font':'black', 'type':'text'}),
-            'username':forms.TextInput(attrs={'font':'black', 'type':'text'}),
-            'first_name':forms.TextInput(attrs={'font':'black', 'type':'text'}),
-            'last_name':forms.TextInput(attrs={'font':'black', 'type':'text'})
-        }

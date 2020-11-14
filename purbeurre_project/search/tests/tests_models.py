@@ -8,10 +8,14 @@ class ProductModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
+        category_name = 'Snack'
+        Category.objects.create(category_name=category_name)
+        # cat.save()
+        category = Category.objects.get(id=1)
         Product.objects.create(
-            category = '1',
-            product_id = '00000000',
-            barcode = '00000000',
+            category = category,
+            product_id = '00000001',
+            barcode = '00000001',
             product_name = 'test',
             resume = 'test',
             picture_path = 'na',
@@ -21,28 +25,15 @@ class ProductModelTest(TestCase):
             )
 
     def test_first_name_label(self):
-        product = Product.objects.get(id=1)
+        product = Product.objects.get(category_id=1)
         field_label = product._meta.get_field('product_name').verbose_name
         self.assertEquals(field_label, 'product name')
 
-    """
-    def test_date_of_death_label(self):
-        author=Product.objects.get(id=1)
-        field_label = author._meta.get_field('date_of_death').verbose_name
-        self.assertEquals(field_label, 'died')
-
-    def test_first_name_max_length(self):
-        author = Product.objects.get(id=1)
-        max_length = author._meta.get_field('first_name').max_length
-        self.assertEquals(max_length, 100)
-
-    def test_object_name_is_last_name_comma_first_name(self):
-        author = Product.objects.get(id=1)
-        expected_object_name = f'{author.last_name}, {author.first_name}'
-        self.assertEquals(expected_object_name, str(author))
-
     def test_get_absolute_url(self):
-        author = Product.objects.get(id=1)
-        # This will also fail if the urlconf is not defined.
-        self.assertEquals(author.get_absolute_url(), '/catalog/author/1')
- """
+        product = Product.objects.get(product_id=1)
+        self.assertEquals(product.get_absolute_url(), '/search/myproducts/1/')
+
+    def test_product_name_max_length(self):
+        product = Product.objects.get(product_id=1)
+        max_length = product._meta.get_field('product_name').max_length
+        self.assertEquals(max_length, 100)

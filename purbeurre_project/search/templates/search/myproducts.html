@@ -36,11 +36,11 @@
         <div class="clearfix"></div>
         <nav aria-label="">
             <ul class="pager">
-                {% if myproduct.has_previous %}
-                <li><a href="?page={{ myproduct.previous_page_number }}">Précédent</a></li>
+                {% if myproducts.has_previous %}
+                <li><a href="?page={{ myproducts.previous_page_number }}&query={{ query }}">Précédent</a></li>
                 {% endif %}
-                {% if substitutes.has_next %}
-                <li><a href="?page={{ myproduct.next_page_number }}">Suivant</a></li>
+                {% if myproducts.has_next %}
+                <li><a href="?page={{ myproducts.next_page_number }}&query={{ query }}">Suivant</a></li>
                 {% endif %}
             </ul>
         </nav>

@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^logout/', views.logout2, name="logout2"),
     url(r'^login/', views.login2, name="login2"),
     url(r'^save/(?P<id>[0-9]+)/', views.save, name="save"),
-    url(r'^myproducts/', views.myproducts, name="myproducts"),
+    url(r'^myproducts/$', views.myproducts, name="myproducts"),
+    url(r'^myproducts/(?P<barcode>[0-9]+)/$', views.detail, name='detail'),
 ]
