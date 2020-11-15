@@ -2,12 +2,26 @@ from django.test import TestCase
 from search.forms import RegisterForm, UserForm
 # Create your tests here.
 
-"""
+
 class RegisterFormTest(TestCase):
 
+    @classmethod
+    def setUpTestData(self):
 
-    renewal_date = forms.DateField(help_text="Enter a date between now and 4 weeks (default 3).")
+        self.data = {
+            'email': 'test@test.te',
+            'password': 'test123',
+            'first_name': 'Test',
+            'last_name': 'test',
+            'username': 'Tester'
+            }
 
+    def test_valid_form(self):
+
+        self.form = RegisterForm(data=self.data)
+        self.assertTrue(self.form.is_valid())
+
+"""
     def clean_renewal_date(self):
         data = self.cleaned_data['renewal_date']
 

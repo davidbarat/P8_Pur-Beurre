@@ -27,6 +27,7 @@ class RegisterForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
+
     username = forms.CharField(
         label='Nom d utilisateur',
         max_length=30,

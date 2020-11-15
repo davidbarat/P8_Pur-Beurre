@@ -8,7 +8,7 @@
     id="profile">
     <h2 class="text-center text-white">{{ user.first_name }}</h2>
 </section>
-<div class="container bg-white text-black text-center">
+<div class="container col-lg-8 bg-white text-black text-center">
     {% if user.is_authenticated %}
     <h2>{{ user.email }}</h2>
     {% else %}

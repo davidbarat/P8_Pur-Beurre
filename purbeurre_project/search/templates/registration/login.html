@@ -7,7 +7,7 @@
         background-size:cover; text-shadow: white 0px 0px 2px; background-position: center;object-fit:
         fill;background-repeat: no-repeat;" class="page-section bg-white">
 </section>
-<div class="row justify-content-center text-black">
+<div class="row col-lg-12 justify-content-center text-black">
     <div class="container">
         {% if form.errors %}
         <p>Votre email et votre mot de passe ne correspondent pas. Veuillez ré-essayez.</p>
@@ -23,9 +23,8 @@
             <input type="submit" value="login" id="submit-login">
         </form>
         <br>
-        <p class="justify-content-center">Si vous n'avez pas de compte, enregistrez-vous<a
-                class="nav-link js-scroll-trigger" href="{% url 'register' %}"> ici
-            </a></p>
+        <p>Si vous n'avez pas de compte, enregistrez-vous<a class="nav-link js-scroll-trigger"
+                href="{% url 'register' %}">ici</a></p>
     </div>
 </div>
 {% endblock %}
