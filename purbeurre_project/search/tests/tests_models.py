@@ -24,6 +24,14 @@ class ProductModelTest(TestCase):
             url = 'na'
             )
 
+        User.objects.create(
+            email =  'test@test.te',
+            password = 'test123',
+            first_name = 'Test',
+            last_name = 'test',
+            username  = 'Tester'
+            )
+
     def test_first_name_label(self):
         product = Product.objects.get(category_id=1)
         field_label = product._meta.get_field('product_name').verbose_name

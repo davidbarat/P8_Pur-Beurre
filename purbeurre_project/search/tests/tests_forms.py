@@ -3,7 +3,7 @@ from search.forms import RegisterForm, UserForm
 # Create your tests here.
 
 
-class RegisterFormTest(TestCase):
+class FormTest(TestCase):
 
     @classmethod
     def setUpTestData(self):
@@ -16,9 +16,19 @@ class RegisterFormTest(TestCase):
             'username': 'Tester'
             }
 
-    def test_valid_form(self):
+        self.dataUserForm = {
+            'username': 'test@test.te',
+            'password': 'test123',
+            }
+
+    def test_valid_RegisterForm(self):
 
         self.form = RegisterForm(data=self.data)
+        self.assertTrue(self.form.is_valid())
+
+    def test_valid_UserForm(self):
+
+        self.form = UserForm(data=self.dataUserForm)
         self.assertTrue(self.form.is_valid())
 
 """
