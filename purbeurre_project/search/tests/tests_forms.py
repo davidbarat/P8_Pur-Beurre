@@ -28,8 +28,8 @@ class FormTest(TestCase):
 
     def test_valid_UserForm(self):
 
-        self.form = UserForm(data=self.dataUserForm)
-        self.assertTrue(self.form.is_valid())
+        self.formUserForm = UserForm(data=self.dataUserForm)
+        self.assertTrue(self.formUserForm.is_valid())
 
 """
     def clean_renewal_date(self):
