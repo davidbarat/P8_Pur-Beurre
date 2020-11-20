@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'purbeurre_project.search.apps.SearchConfig',
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [
