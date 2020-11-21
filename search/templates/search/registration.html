@@ -1,0 +1,27 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+{% load static %}
+<section style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%),url('/static/search/img/fond_ecran.jpg'); background-repeat:no-repeat;
+        background-size:cover; text-shadow: white 0px 0px 2px; background-position: center;object-fit:
+        fill;background-repeat: no-repeat;" class="page-section bg-white">
+</section>
+
+<section class="page-section bg-white" id="register">
+    <div class="container">
+        {% if registered %}
+        <h1>Merci de vous êtes inscrit(e)</h1>
+        {% else %}
+        <h1>Remplissez le formulaire ci-dessous :</h1>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ profile_form.as_p }}
+            {{ user_form.as_p }}
+            <input type="submit" name="" value="Enregistrer">
+        </form>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

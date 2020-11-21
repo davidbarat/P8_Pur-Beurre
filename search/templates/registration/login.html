@@ -1,0 +1,30 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<section style="background-image: linear-gradient(to top, rgba(92, 77, 66, 0.80) 50%, rgba(92, 77, 66, 0.8) 100%), url('/static/search/img/fond_ecran.jpg'); background-repeat:no-repeat;
+        background-size:cover; text-shadow: white 0px 0px 2px; background-position: center;object-fit:
+        fill;background-repeat: no-repeat;" class="page-section bg-white">
+</section>
+<div class="row col-lg-12 justify-content-center text-black">
+    <div class="container">
+        {% if form.errors %}
+        <p>Votre email et votre mot de passe ne correspondent pas. Veuillez ré-essayez.</p>
+        {% endif %}
+        <form method="post" class="text-black">
+            {% csrf_token %}
+            {# form #}
+            {% for field in form %}
+            <div class="fieldWrapper text-black">
+                {{ field.label_tag }} {{ field }}
+            </div>
+            {% endfor %}
+            <input type="submit" value="login" id="submit-login">
+        </form>
+        <br>
+        <p>Si vous n'avez pas de compte, enregistrez-vous<a class="nav-link js-scroll-trigger"
+                href="{% url 'register' %}">ici</a></p>
+    </div>
+</div>
+{% endblock %}
