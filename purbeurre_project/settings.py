@@ -170,7 +170,7 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
     # Extra places for collectstatic to find static files.
     STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static.search'),
+        os.path.join(PROJECT_ROOT, 'static/search'),
     )
 
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
