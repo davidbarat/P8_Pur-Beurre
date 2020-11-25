@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your tests here.
 
 class ModelTest(TestCase):
+
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
@@ -30,7 +31,7 @@ class ModelTest(TestCase):
             first_name = 'Test',
             last_name = 'test',
             username  = 'Tester'
-            )
+            ) 
 
     def test_first_name_label(self):
         product = Product.objects.get(category_id=1)
