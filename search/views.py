@@ -16,7 +16,7 @@ from search.models import Product, Category, User, DetailProduct, Substitute
 def index(request):
     template = loader.get_template('search/index.html')
     return HttpResponse(template.render(request=request))
-
+"""
 def listing(request):
     product_list = Product.objects.filter(category_id=1).order_by('barcode')
     paginator = Paginator(product_list, 9)
@@ -35,7 +35,7 @@ def listing(request):
         'paginate': True
     }
     return render(request, 'search/list_all.html', context)
-
+"""
 @login_required()
 def search(request):
     template = loader.get_template('search/form.html')

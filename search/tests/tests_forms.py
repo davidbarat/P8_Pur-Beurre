@@ -1,12 +1,15 @@
 from django.test import TestCase
 from search.forms import RegisterForm, UserForm
+
+from django.contrib.auth.models import User
+
 # Create your tests here.
 
 
 class FormTest(TestCase):
 
     @classmethod
-    def setUpTestData(self):
+    def setUp(self):
 
         self.data = {
             'email': 'test@test.te',
@@ -28,21 +31,15 @@ class FormTest(TestCase):
 
     def test_valid_UserForm(self):
 
+        self.user = User.objects.create_user(
+        username='test', 
+        email='test@test.te',
+        password='test123',
+        last_name='test',
+        first_name='Test',
+        )
+        self.user.save()
+
+        # self.getuser = User.objects.get(id=1)
         self.formUserForm = UserForm(data=self.dataUserForm)
         self.assertTrue(self.formUserForm.is_valid())
-
-"""
-    def clean_renewal_date(self):
-        data = self.cleaned_data['renewal_date']
-
-        # Check if a date is not in the past.
-        if data < datetime.date.today():
-            raise ValidationError(_('Invalid date - renewal in past'))
-
-        # Check if date is in the allowed range (+4 weeks from today).
-        if data > datetime.date.today() + datetime.timedelta(weeks=4):
-            raise ValidationError(_('Invalid date - renewal more than 4 weeks ahead'))
-
-        # Remember to always return the cleaned data.
-        return data
-"""

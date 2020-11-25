@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your tests here.
 
-class ProductModelTest(TestCase):
+class ModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
