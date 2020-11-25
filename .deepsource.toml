@@ -1,0 +1,12 @@
+version = 1
+
+test_patterns = ["search/tests/test*"]
+
+exclude_patterns = ["selenium_tests.py,geckodriver.log"]
+
+[[analyzers]]
+name = "python"
+enabled = true
+
+  [analyzers.meta]
+  runtime_version = "3.x.x"
