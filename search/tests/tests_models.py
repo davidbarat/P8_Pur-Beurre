@@ -9,14 +9,14 @@ class ModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        category_name = 'Snack'
-        Category.objects.create(category_name=category_name)
+        cls.category_name = 'Fromages'
+        Category.objects.create(category_name=cls.category_name)
         # cat.save()
-        category = Category.objects.get(id=1)
+        cls.category = Category.objects.get(id=1)
         Product.objects.create(
-            category = category,
-            product_id = '00000001',
-            barcode = '00000001',
+            category = cls.category,
+            product_id = '10',
+            barcode = '00000010',
             product_name = 'test',
             resume = 'test',
             picture_path = 'na',
@@ -39,10 +39,10 @@ class ModelTest(TestCase):
         self.assertEquals(field_label, 'product name')
 
     def test_get_absolute_url(self):
-        product = Product.objects.get(product_id=1)
-        self.assertEquals(product.get_absolute_url(), '/search/myproducts/1/')
+        product = Product.objects.get(product_id=10)
+        self.assertEquals(product.get_absolute_url(), '/search/myproducts/10/')
 
     def test_product_name_max_length(self):
-        product = Product.objects.get(product_id=1)
+        product = Product.objects.get(product_id=10)
         max_length = product._meta.get_field('product_name').max_length
         self.assertEquals(max_length, 100)
