@@ -6,7 +6,7 @@
 
 The purpose of this project is to allow user to get healthy product instead of their usual fat products.
 
-![alt text](https://github.com/davidbarat/P8_Pur-Beurre/blob/master/imagsite.png?raw=true)
+![alt text](https://github.com/davidbarat/P8_Pur-Beurre/blob/master/imagesite.png)
 
 ## Main steps of the script
 1. The user has to fullfill the registration form,
