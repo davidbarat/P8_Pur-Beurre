@@ -11,7 +11,7 @@ The purpose of this project is to allow user to get healthy product instead of t
 ## Main steps of the script
 1. The user has to fullfill the registration form,
 2. Once connected, you can make a simple search, 
-3. The site will return a list of produc with a better nutriscore grade,
+3. The site will return a list of product with a better nutriscore grade,
 4. The user can have a detail view of the product and then if you mind, you can store your new fav product.
 5. Finally the user can find all his new products in a myproducts link in the navbar at the top.
 
