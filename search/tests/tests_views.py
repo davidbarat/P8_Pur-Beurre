@@ -88,5 +88,11 @@ class ViewsTest(TestCase):
             substitute_id=product)
         self.assertEqual(substitute.user_email, 'test3@test.te')
 
+    def test_myproducts(self):
+        self.client.login(username='test3@test.te', password='test123')
+        url = self.client.get(
+            reverse('myproducts'))
+        self.assertEqual(url.status_code, 200)        
+
 
 
