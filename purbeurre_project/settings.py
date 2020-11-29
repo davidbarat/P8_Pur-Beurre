@@ -165,9 +165,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-if os.environ.get('ENV') == 'PRODUCTION':
+django_heroku.settings(locals())
+
+""" if os.environ.get('ENV') == 'PRODUCTION':
 
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -182,7 +184,8 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
     # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-    STATIC_URL = '/'
+    # STATIC_URL = '/'
 
     db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
+    DATABASES['default'].update(db_from_env) """
+
