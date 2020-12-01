@@ -9,6 +9,7 @@ before_script:
   - psql -U postgres -c "CREATE USER test WITH PASSWORD 'test';" -U postgres
   - psql -U postgres -c "CREATE USER david WITH PASSWORD 'test';" -U postgres
   - psql -U postgres -c "ALTER ROLE test CREATEDB;" -U postgres
+  - psql -U postgres -c "ALTER ROLE david CREATEDB;" -U postgres
   - psql -U postgres -c "CREATE DATABASE dbtest;" -U postgres
 install:
   - pip install -r requirements.txt
