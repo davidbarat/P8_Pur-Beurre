@@ -6,10 +6,10 @@ services:
 env:
   - DJANGO=3.1 DB=postgresql
 before_script:
-  - psql -c "CREATE USER david WITH PASSWORD 'david_test';" -U postgres
-  # - psql -c 'create database test_db;' -U postgres
+  - psql -U postgres -c "CREATE USER test WITH CREATEUSER PASSWORD 'test';"
+  - psql -U postgres -c "ALTER USER test CREATEDB;"
+  - psql -U postgres -c 'CREATE DATABASE dbtest;'
 install:
   - pip install -r requirements.txt
-
 script:
   - coverage run manage.py test search
