@@ -14,4 +14,4 @@ before_script:
 install:
   - pip install -r requirements.txt
 script:
-  - coverage run manage.py test search
+  - coverage run manage.py test search -verbosity 2
