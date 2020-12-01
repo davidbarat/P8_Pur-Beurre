@@ -6,9 +6,9 @@ services:
 env:
   - DJANGO=3.1 DB=postgresql
 before_script:
-  - psql -U postgres -c "CREATE USER test WITH CREATEUSER PASSWORD 'test';"
-  - psql -U postgres -c "ALTER USER test CREATEDB;"
-  - psql -U postgres -c 'CREATE DATABASE dbtest;'
+  - psql -U postgres -c "CREATE USER test WITH PASSWORD 'test';" -U postgres
+  - psql -U postgres -c "ALTER ROLE test CREATEDB;" -U postgres
+  - psql -U postgres -c "CREATE DATABASE dbtest;" -U postgres
 install:
   - pip install -r requirements.txt
 script:
