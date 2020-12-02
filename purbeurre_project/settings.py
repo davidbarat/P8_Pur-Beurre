@@ -183,7 +183,6 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, "static"),
     os.path.join(PROJECT_ROOT, "staticfiles"),
-    "/app/purbeurre_project/staticfiles",
 )
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -192,6 +191,12 @@ django_heroku.settings(locals())
 if os.environ.get("ENV") == "PRODUCTION":
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES["default"].update(db_from_env)
+
+    STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, "static"),
+    os.path.join(PROJECT_ROOT, "staticfiles"),
+    "/app/purbeurre_project/staticfiles",
+)
     """
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
