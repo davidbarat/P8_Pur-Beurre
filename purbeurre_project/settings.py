@@ -178,21 +178,21 @@ STATIC_URL = '/static/'
     os.path.join(BASE_DIR, 'static'),
 ) """
 
+#For staticfiles in Heroku. DISABLE_COLLECTSTATIC=1 donc pas de garde "IS_PROD_ENV".
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static/search/'),
-)
+STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'),)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-
 django_heroku.settings(locals())
-""" if os.environ.get('ENV') == 'PRODUCTION':
-
+if os.environ.get('ENV') == 'PRODUCTION':
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+    """
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # Static files settings
@@ -207,7 +207,6 @@ django_heroku.settings(locals())
     # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     # STATIC_URL = '/'
-
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env) """
+    """
+    
 

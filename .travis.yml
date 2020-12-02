@@ -15,3 +15,5 @@ install:
   - pip install -r requirements.txt
 script:
   - coverage run manage.py test search -v 2
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
