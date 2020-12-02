@@ -20,16 +20,17 @@ from django.urls import include, path
 from search import views
 
 urlpatterns = [
-    url(r'^$', views.index),
-    path('mentions/', include('search.urls')),
-    url(r'^search/', include('search.urls')),
-    url(r'^admin/', admin.site.urls),
-    url(r'^register/$',views.register, name='register'),
+    url(r"^$", views.index),
+    path("mentions/", include("search.urls")),
+    url(r"^search/", include("search.urls")),
+    url(r"^admin/", admin.site.urls),
+    url(r"^register/$", views.register, name="register"),
     url(r"^accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns = [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        url(r"^__debug__/", include(debug_toolbar.urls)),
     ] + urlpatterns

@@ -6,11 +6,8 @@ from selenium.webdriver.common.keys import Keys
 
 
 class purBeurreTest(unittest.TestCase):
-
-
     def setUp(self):
-        self.driver = webdriver.Firefox(
-            "/Users/david/Projets/selenium driver/")
+        self.driver = webdriver.Firefox("/Users/david/Projets/selenium driver/")
         self.url = "http://127.0.0.1:8000/"
         self.search = "Nutella"
         self.user = "test@test.com"
@@ -45,7 +42,6 @@ class purBeurreTest(unittest.TestCase):
         time.sleep(5)
         self.elem = self.driver.find_element_by_id("contact")
         time.sleep(5)
-
 
     def tearDown(self):
         self.driver.quit()

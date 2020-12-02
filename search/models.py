@@ -16,13 +16,10 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category,
-        on_delete=models.DO_NOTHING
-    )
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     product_id = models.AutoField(primary_key=True)
     barcode = models.BigIntegerField()
-    product_name = models.CharField(
-        max_length=100, default="na", primary_key = False)
+    product_name = models.CharField(max_length=100, default="na", primary_key=False)
     resume = models.CharField(max_length=1000)
     picture_path = models.URLField()
     small_picture_path = models.URLField()
@@ -33,16 +30,14 @@ class Product(models.Model):
         return self.product_name
 
     def get_absolute_url(self):
-        return reverse('detail', args=[str(self.product_id)])
+        return reverse("detail", args=[str(self.product_id)])
 
 
 class DetailProduct(models.Model):
 
     id = models.OneToOneField(
-        Product, 
-        to_field="product_id", 
-        primary_key = True, 
-        on_delete = models.CASCADE)
+        Product, to_field="product_id", primary_key=True, on_delete=models.CASCADE
+    )
     energy_100g = models.DecimalField(max_digits=7, decimal_places=2)
     energy_unit = models.CharField(max_length=5)
     proteins_100g = models.DecimalField(max_digits=6, decimal_places=2)
@@ -57,19 +52,18 @@ class DetailProduct(models.Model):
 class Substitute(models.Model):
 
     id = models.AutoField(primary_key=True)
-    user_email = models.EmailField(
-        max_length=50, default='dav.barat@gmail.com')
+    user_email = models.EmailField(max_length=50, default="dav.barat@gmail.com")
     substitute_id = models.ForeignKey(
-        Product, to_field="product_id", on_delete=models.CASCADE)
+        Product, to_field="product_id", on_delete=models.CASCADE
+    )
 
 
 class EmailBackend(ModelBackend):
-
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
-            user = UserModel.objects.get(Q(email__iexact=username))   
+            user = UserModel.objects.get(Q(email__iexact=username))
         except MultipleObjectsReturned:
-            return User.objects.filter(email=username).order_by('id').first()
+            return User.objects.filter(email=username).order_by("id").first()
         else:
             if user.check_password(password) and self.user_can_authenticate(user):
                 return user

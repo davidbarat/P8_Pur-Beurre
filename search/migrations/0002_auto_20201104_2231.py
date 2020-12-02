@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('search', '0001_initial'),
+        ("search", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='substitute',
-            name='user',
+            model_name="substitute",
+            name="user",
         ),
         migrations.AddField(
-            model_name='substitute',
-            name='user_email',
-            field=models.EmailField(default='dav.barat@gmail.com', max_length=50),
+            model_name="substitute",
+            name="user_email",
+            field=models.EmailField(default="dav.barat@gmail.com", max_length=50),
         ),
     ]
