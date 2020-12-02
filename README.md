@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/davidbarat/P8_Pur-Beurre.svg?branch=master)](https://travis-ci.com/davidbarat/P8_Pur-Beurre)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # P8_Pur-Beurre
 -------
