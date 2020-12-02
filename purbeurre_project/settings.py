@@ -175,7 +175,6 @@ STATIC_URL = "/static/"
     os.path.join(BASE_DIR, 'static'),
 ) """
 
-# For staticfiles in Heroku. DISABLE_COLLECTSTATIC=1 donc pas de garde "IS_PROD_ENV".
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
@@ -184,6 +183,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, "static"),
     os.path.join(PROJECT_ROOT, "staticfiles"),
+    "/app/purbeurre_project/staticfiles",
 )
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
