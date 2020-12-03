@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 import django_heroku
 
 # Activate Django-Heroku
@@ -31,12 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", '7rxo>\r#"qi)y<mD`.X3\\^\x0c<k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 if os.environ.get("ENV") == "PRODUCTION":
     DEBUG = False
-else:
-    DEBUG = True
-
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
 
@@ -78,10 +74,7 @@ ROOT_URLCONF = "purbeurre_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(BASE_DIR, "templates"),
-            os.path.join(BASE_DIR, "search", "templates", "search"),
-        ],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -169,47 +162,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
-# Extra places for collectstatic to find static files.
-""" STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-) """
-
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "static"),
-    os.path.join(PROJECT_ROOT, "staticfiles"),
-)
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 django_heroku.settings(locals())
-if os.environ.get("ENV") == "PRODUCTION":
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES["default"].update(db_from_env)
 
-    STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "static"),
-    os.path.join(PROJECT_ROOT, "staticfiles"),
-    "/app/purbeurre_project/staticfiles",
-)
-    """
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-    # Static files settings
-    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
-    # Extra places for collectstatic to find static files.
-    STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
-    )
-
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-    # STATIC_URL = '/'
-    """
+if os.getenv("ENV") == "PRODUCTION":
+    django_heroku.settings(locals())
