@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import os
-import dj_database_url
+from pathlib import Path
+
 import django_heroku
 
 # Activate Django-Heroku
@@ -31,11 +31,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", '7rxo>\r#"qi)y<mD`.X3\\^\x0c<k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
+
 if os.environ.get("ENV") == "PRODUCTION":
     DEBUG = False
-else:
-    DEBUG = True
 
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
@@ -64,12 +63,6 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-MIDDLEWARE_CLASSES = (
-    # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-)
-
 # LOGIN_REDIRECT_URL = '/search/profile/'
 LOGIN_REDIRECT_URL = "/"
 
@@ -78,10 +71,7 @@ ROOT_URLCONF = "purbeurre_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(BASE_DIR, "templates"),
-            os.path.join(BASE_DIR, "search", "templates", "search"),
-        ],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -101,14 +91,7 @@ WSGI_APPLICATION = "purbeurre_project.wsgi.application"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",  # on utilise l'adaptateur postgresql
-        "NAME": "purbeurre",  # le nom de notre base de donnees creee precedemment
-        "USER": "david",  # attention : remplacez par votre nom d'utilisateur
-        "PASSWORD": "",
-        "HOST": "",
-        "PORT": "5432",
-    }
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "db.sqlite3"}
 }
 
 AUTHENTICATION_BACKENDS = ["search.models.EmailBackend"]
@@ -157,59 +140,9 @@ INTERNAL_IPS = [
     # ...
 ]
 
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-)
-
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
-# Extra places for collectstatic to find static files.
-""" STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-) """
-
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "static"),
-    os.path.join(PROJECT_ROOT, "staticfiles"),
-)
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-django_heroku.settings(locals())
-if os.environ.get("ENV") == "PRODUCTION":
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES["default"].update(db_from_env)
-
-    STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "static"),
-    os.path.join(PROJECT_ROOT, "staticfiles"),
-    "/app/purbeurre_project/staticfiles",
-)
-    """
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-    # Static files settings
-    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
-    # Extra places for collectstatic to find static files.
-    STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
-    )
-
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-    # STATIC_URL = '/'
-    """
+if os.getenv("ENV") == "PRODUCTION":
+    django_heroku.settings(locals())

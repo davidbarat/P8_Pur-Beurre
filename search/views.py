@@ -14,14 +14,12 @@ from search.models import Product, Category, User, DetailProduct, Substitute
 
 
 def index(request):
-    template = loader.get_template("search/index.html")
-    return HttpResponse(template.render(request=request))
+    return render(request, "search/index.html")
 
 
 @login_required()
 def search(request):
-    template = loader.get_template("search/form.html")
-    return HttpResponse(template.render(request=request))
+    return render(request, "search/form.html")
 
 
 @login_required()
@@ -50,9 +48,7 @@ def searching(request):
                 product_category = products["fields"]["category"]
                 product_picture_path = products["fields"]["picture_path"]
         else:
-            message = (
-                "Le produit n'a pas été trouvé, veuillez effectuer une autre recherche"
-            )
+            message = "Le produit n'a pas été trouvé, veuillez effectuer une autre recherche"
 
     substitutes = Product.objects.filter(
         nutriscore_grade__lt=product_nutriscore
@@ -125,7 +121,9 @@ def register(request):
     else:
         user_form = RegisterForm()
     return render(
-        request, "registration.html", {"user_form": user_form, "registered": registered}
+        request,
+        "search/registration.html",
+        {"user_form": user_form, "registered": registered},
     )
 
 
@@ -140,21 +138,20 @@ def profile(request, username=None):
     args1 = {
         "post_owner": post_owner,
     }
-    return render(request, "profile.html", args1)
+    return render(request, "search/profile.html", args1)
 
 
 def mentions(request):
-    template = loader.get_template("search/mentions.html")
-    return HttpResponse(template.render(request=request))
+    return render(request, "search/mentions.html")
 
 
 @login_required()
 def detail(request, barcode):
     # products = get_object_or_404(Product, pk=barcode)
     products = Product.objects.filter(barcode__icontains=barcode)[:1]
-    detail_products = DetailProduct.objects.filter(id_id__barcode__icontains=barcode)[
-        :1
-    ]
+    detail_products = DetailProduct.objects.filter(
+        id_id__barcode__icontains=barcode
+    )[:1]
     for product in products:
         product_dict = {
             "product_name": product.product_name,
@@ -213,7 +210,7 @@ def myproducts(request):
         myproducts = paginator.page(paginator.num_pages)
 
     context = {"myproducts": myproducts, "paginate": True}
-    return render(request, "myproducts.html", context)
+    return render(request, "search/myproducts.html", context)
 
 
 @login_required()
@@ -231,9 +228,11 @@ def save(request, id):
     try:
         substitute_obj.save()
         # return HttpResponse("SaveOK")
-        message = "Le produit " + product_obj.product_name + " a bien été enregistré"
+        message = (
+            "Le produit " + product_obj.product_name + " a bien été enregistré"
+        )
         context = {"message": message}
-        return render(request, "myproducts.html", context)
+        return render(request, "search/myproducts.html", context)
 
     except:
         # return HttpResponse("SaveError")
@@ -242,4 +241,4 @@ def save(request, id):
             + product_obj.product_name
         )
         context = {"message": message}
-        return render(request, "myproducts.html", context)
+        return render(request, "search/myproducts.html", context)
