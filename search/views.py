@@ -24,7 +24,7 @@ def search(request):
     return HttpResponse(template.render(request=request))
 
 
-@login_required()
+# @login_required()
 def searching(request):
     query = request.GET.get("query")
     product_nutriscore = ""
@@ -125,7 +125,7 @@ def register(request):
     else:
         user_form = RegisterForm()
     return render(
-        request, "registration.html", {"user_form": user_form, "registered": registered}
+        request, "search/registration.html", {"user_form": user_form, "registered": registered}
     )
 
 
@@ -140,7 +140,7 @@ def profile(request, username=None):
     args1 = {
         "post_owner": post_owner,
     }
-    return render(request, "profile.html", args1)
+    return render(request, "search/profile.html", args1)
 
 
 def mentions(request):
@@ -213,7 +213,7 @@ def myproducts(request):
         myproducts = paginator.page(paginator.num_pages)
 
     context = {"myproducts": myproducts, "paginate": True}
-    return render(request, "myproducts.html", context)
+    return render(request, "search/myproducts.html", context)
 
 
 @login_required()

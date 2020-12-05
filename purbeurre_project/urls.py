@@ -17,7 +17,6 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import include, path
-from django.conf.urls.static import static
 from search import views
 
 
@@ -28,7 +27,7 @@ urlpatterns = [
     url(r"^admin/", admin.site.urls),
     url(r"^register/$", views.register, name="register"),
     url(r"^accounts/", include("django.contrib.auth.urls")),
-    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    ]
     
 
 if settings.DEBUG:

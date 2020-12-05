@@ -10,9 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import os
 from pathlib import Path
-
+import os
 import django_heroku
 
 # Activate Django-Heroku
@@ -32,10 +31,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", '7rxo>\r#"qi)y<mD`.X3\\^\x0c<k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 if os.environ.get("ENV") == "PRODUCTION":
     DEBUG = False
-
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
 
@@ -62,6 +59,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+MIDDLEWARE_CLASSES = (
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+)
 
 # LOGIN_REDIRECT_URL = '/search/profile/'
 LOGIN_REDIRECT_URL = "/"
@@ -91,7 +94,14 @@ WSGI_APPLICATION = "purbeurre_project.wsgi.application"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "db.sqlite3"}
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",  # on utilise l'adaptateur postgresql
+        "NAME": "purbeurre",  # le nom de notre base de donnees creee precedemment
+        "USER": "david",  # attention : remplacez par votre nom d'utilisateur
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "5432",
+    }
 }
 
 AUTHENTICATION_BACKENDS = ["search.models.EmailBackend"]
@@ -140,9 +150,23 @@ INTERNAL_IPS = [
     # ...
 ]
 
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+)
+
+
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
 STATIC_ROOT = str(BASE_DIR / 'staticfiles')
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+django_heroku.settings(locals())
 
 if os.getenv("ENV") == "PRODUCTION":
     django_heroku.settings(locals())
