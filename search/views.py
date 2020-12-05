@@ -233,7 +233,7 @@ def save(request, id):
         # return HttpResponse("SaveOK")
         message = "Le produit " + product_obj.product_name + " a bien été enregistré"
         context = {"message": message}
-        return render(request, "myproducts.html", context)
+        return render(request, "search/myproducts.html", context)
 
     except:
         # return HttpResponse("SaveError")
@@ -242,4 +242,4 @@ def save(request, id):
             + product_obj.product_name
         )
         context = {"message": message}
-        return render(request, "myproducts.html", context)
+        return render(request, "search/myproducts.html", context)
