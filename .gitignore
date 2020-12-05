@@ -1,5 +1,6 @@
 env/
-purbeurre/__pycache__
-search/__pycache__/
-search/migrations/__pycache__/
+venv/
+.env 
+__pycache__/
 htlmcov
+staticfiles/
