@@ -26,46 +26,48 @@
         <div class="row justify-content-center">
             <h3>Vous pouvez remplacer cet aliment par:</h3>
             {% if not user.is_authenticated %}
-            <br>
+        </div>
+        <div class="row justify-content-center">
             <p class="row justify-content-center">Si vous voulez vous enregistrez et sauvegardez vos recherches c'est
                 par <a href="{% url 'register' %}"> ici</a></p>
             {% endif %}
         </div>
-        <div class="row">
-            {% for substitute in substitutes %}
-            <div class="col-sm-4 text-center">
-                <div class="item">
-                    <a href="{{ substitute.barcode }}">
-                        <img class="img-responsive" src="{{ substitute.small_picture_path }}"
-                            alt="{{ substitute.product_name }}">
-                        <span class="notify-badge">{{ substitute.nutriscore_grade }}</span>
-                    </a>
-                    <p>{{ substitute.product_name }}</p>
-                    {% if user.is_authenticated %}
-                    <a class="btn btn-secondary btn-xl js-scroll-trigger"
-                        href="{% url 'save' id=substitute.product_id %}" method="post">Sauvegardez</a>
-                    {% endif %}
+    </div>
+    <div class="row">
+        {% for substitute in substitutes %}
+        <div class="col-sm-4 text-center">
+            <div class="item">
+                <a href="{{ substitute.barcode }}">
+                    <img class="img-responsive" src="{{ substitute.small_picture_path }}"
+                        alt="{{ substitute.product_name }}">
+                    <span class="notify-badge">{{ substitute.nutriscore_grade }}</span>
+                </a>
+                <p>{{ substitute.product_name }}</p>
+                {% if user.is_authenticated %}
+                <a class="btn btn-secondary btn-xl js-scroll-trigger" href="{% url 'save' id=substitute.product_id %}"
+                    method="post">Sauvegardez</a>
+                {% endif %}
 
-                </div>
             </div>
-            {% if forloop.counter|divisibleby:3 %}
-            <div class="clearfix"></div>
-            {% endif %}
-            {% endfor %}
         </div>
-        {% if paginate %}
+        {% if forloop.counter|divisibleby:3 %}
         <div class="clearfix"></div>
-        <nav aria-label="">
-            <ul class="pager">
-                {% if substitutes.has_previous %}
-                <li><a href="?page={{ substitutes.previous_page_number }}&query={{ query }}">Précédent</a></li>
-                {% endif %}
-                {% if substitutes.has_next %}
-                <li><a href="?page={{ substitutes.next_page_number }}&query={{ query }}">Suivant</a></li>
-                {% endif %}
-            </ul>
-        </nav>
         {% endif %}
+        {% endfor %}
+    </div>
+    {% if paginate %}
+    <div class="clearfix"></div>
+    <nav aria-label="">
+        <ul class="pager">
+            {% if substitutes.has_previous %}
+            <li><a href="?page={{ substitutes.previous_page_number }}&query={{ query }}">Précédent</a></li>
+            {% endif %}
+            {% if substitutes.has_next %}
+            <li><a href="?page={{ substitutes.next_page_number }}&query={{ query }}">Suivant</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
     </div>
 </section>
 {% endif %}
