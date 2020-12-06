@@ -88,5 +88,5 @@ class ViewsTest(TestCase):
 
     def test_myproducts(self):
         self.client.login(username="test3@test.te", password="test123")
-        url = self.client.get(reverse("search/myproducts"))
+        url = self.client.get(reverse("myproducts"))
         self.assertEqual(url.status_code, 200)
