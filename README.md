@@ -20,6 +20,16 @@ The purpose of this project is to allow user to get healthy product instead of t
 * All Data came from OpenFoodFacts Api, please follow the link below if you want more informtions:
 https://fr-en.openfoodfacts.org/
 	
+## Technologies:
+This site uses:
+
+* Bootstrap
+* Python 3.6
+* Javascript
+* Django 3.1
+
+## requisite
+* Postgresql database
 
 ## Installing
 
