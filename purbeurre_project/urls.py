@@ -28,7 +28,7 @@ urlpatterns = [
     url(r"^search/", include("search.urls")),
     url(r"^admin/", admin.site.urls),
     url(r"^register/$", views.register, name="register"),
-    url(r"^accounts/", include("django.contrib.auth.urls")),
+    url(r"^accounts/", include("django.contrib.auth.urls"), name="login"),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     
 
