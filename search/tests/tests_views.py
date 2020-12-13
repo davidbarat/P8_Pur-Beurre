@@ -4,6 +4,7 @@ from django.contrib.auth.models import AnonymousUser, User
 
 from search.views import searching, register
 from search.models import Product, Category, DetailProduct, Substitute
+from search.forms import RegisterForm, UserForm
 from .tests_models import ModelTest
 
 # Create your tests here.
@@ -11,6 +12,15 @@ class ViewsTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.factory = RequestFactory()
+
+        cls.data = {
+            "email":"test4@test.te",
+            "password":"test123",
+            "first_name":"Test4",
+            "last_name":"test4",
+            "username":"Tester4",
+        }
+
         cls.user = User.objects.create_user(
             email="test3@test.te",
             password="test123",
@@ -18,6 +28,7 @@ class ViewsTest(TestCase):
             last_name="test",
             username="Tester",
         )
+        cls.user.save()
 
         cls.category_name = "Snack"
         Category.objects.create(category_name=cls.category_name)
@@ -50,7 +61,7 @@ class ViewsTest(TestCase):
         )
 
         cls.client = Client()
-
+        
     def test_searching(self):
         request = self.factory.get("/search/")
         request.user = self.user
@@ -70,6 +81,8 @@ class ViewsTest(TestCase):
         request.user = self.user
         response = register(request)
         self.assertEqual(response.status_code, 200)
+        self.formUserForm = RegisterForm(data=self.data)
+        self.assertTrue(self.formUserForm.is_valid())
 
     def test_mentions(self):
         url = self.client.get(reverse("mentions"))

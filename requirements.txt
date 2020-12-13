@@ -21,6 +21,7 @@ pytz==2020.1
 regex==2020.11.13
 requests==2.24.0
 selenium==3.141.0
+sentry-sdk==0.19.4
 sqlparse==0.3.1
 testcase==0.1.0
 toml==0.10.2

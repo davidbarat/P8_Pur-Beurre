@@ -8,20 +8,25 @@ from django.contrib.auth.models import User
 
 class FormTest(TestCase):
     @classmethod
-    def setUp(self):
+    def setUpTestData(cls):
 
-        self.data = {
+        cls.data = {
             "email": "test@test.te",
             "password": "test123",
             "first_name": "Test",
             "last_name": "test",
             "username": "Tester",
         }
-
-        self.dataUserForm = {
-            "username": "test@test.te",
-            "password": "test123",
-        }
+        
+        cls.user2 = User.objects.create_user(
+            username="test",
+            email="test@test.te",
+            password="test123",
+            last_name="test",
+            first_name="Test",
+        )
+        cls.user2.save()
+        # cls.userTest = User.objects.get(id=1)
 
     def test_valid_RegisterForm(self):
 
@@ -29,16 +34,6 @@ class FormTest(TestCase):
         self.assertTrue(self.form.is_valid())
 
     def test_valid_UserForm(self):
-
-        self.user = User.objects.create_user(
-            username="test",
-            email="test@test.te",
-            password="test123",
-            last_name="test",
-            first_name="Test",
-        )
-        self.user.save()
-
-        # self.getuser = User.objects.get(id=1)
-        self.formUserForm = UserForm(data=self.dataUserForm)
-        # self.assertTrue(self.formUserForm.is_valid())
+        
+        self.formUserForm = UserForm(data=self.data)
+        self.assertTrue(self.formUserForm.is_valid())
