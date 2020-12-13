@@ -22,6 +22,9 @@ from django.conf.urls.static import static
 from search import views
 
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 urlpatterns = [
     url(r"^$", views.index),
     path("mentions/", include("search.urls")),
@@ -29,6 +32,7 @@ urlpatterns = [
     url(r"^admin/", admin.site.urls),
     url(r"^register/$", views.register, name="register"),
     url(r"^accounts/", include("django.contrib.auth.urls"), name="login"),
+    path('sentry-debug/', trigger_error),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     
 

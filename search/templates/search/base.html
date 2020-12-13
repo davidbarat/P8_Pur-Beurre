@@ -56,7 +56,8 @@
                             {% url 'logout2'%}" id="logout">Déconnexion</a></li>
                         {% endif %}
                         {% if not user.is_authenticated %}
-                        <li class="nav-item"><a class="text-black js-scroll-trigger" href="{% url 'login' %}">Login
+                        <li class="nav-item"><a class="text-black js-scroll-trigger" href="{% url 'login' %}"
+                                id="login">Login
                             </a></li>
                         {% endif %}
                     </ul>

@@ -17,7 +17,7 @@
 <div id="header">
     <div class="content">
         <h1>Coverage report:
-            <span class="pc_cov">85%</span>
+            <span class="pc_cov">70%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <form id="filter_container">
@@ -34,6 +34,8 @@
         <span class="key">s</span>
         <span class="key">m</span>
         <span class="key">x</span>
+        <span class="key">b</span>
+        <span class="key">p</span>
         <span class="key">c</span> &nbsp; change column sorting
     </p>
     </div>
@@ -46,21 +48,27 @@
                 <th class="shortkey_s">statements</th>
                 <th class="shortkey_m">missing</th>
                 <th class="shortkey_x">excluded</th>
+                <th class="shortkey_b">branches</th>
+                <th class="shortkey_p">partial</th>
                 <th class="right shortkey_c">coverage</th>
             </tr>
         </thead>
         <tfoot>
             <tr class="total">
                 <td class="name left">Total</td>
-                <td>334</td>
-                <td>50</td>
+                <td>214</td>
+                <td>52</td>
                 <td>0</td>
-                <td class="right" data-ratio="284 334">85%</td>
+                <td>36</td>
+                <td>7</td>
+                <td class="right" data-ratio="175 250">70%</td>
             </tr>
         </tfoot>
         <tbody>
             <tr class="file">
                 <td class="name left"><a href="search___init___py.html">search/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -71,11 +79,15 @@
                 <td>1</td>
                 <td>0</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="file">
                 <td class="name left"><a href="search_apps_py.html">search/apps.py</a></td>
                 <td>3</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="3 3">100%</td>
@@ -85,74 +97,24 @@
                 <td>18</td>
                 <td>0</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="18 18">100%</td>
             </tr>
             <tr class="file">
-                <td class="name left"><a href="search_migrations_0001_initial_py.html">search/migrations/0001_initial.py</a></td>
-                <td>7</td>
+                <td class="name left"><a href="search_models_py.html">search/models.py</a></td>
+                <td>57</td>
+                <td>8</td>
                 <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="7 7">100%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_migrations_0002_auto_20201104_2231_py.html">search/migrations/0002_auto_20201104_2231.py</a></td>
                 <td>4</td>
                 <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="4 4">100%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_migrations___init___py.html">search/migrations/__init__.py</a></td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="0 0">100%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_models_py.html">search/models.py</a></td>
-                <td>55</td>
-                <td>6</td>
-                <td>0</td>
-                <td class="right" data-ratio="49 55">89%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_tests___init___py.html">search/tests/__init__.py</a></td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="0 0">100%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_tests_tests_forms_py.html">search/tests/tests_forms.py</a></td>
-                <td>15</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="15 15">100%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_tests_tests_models_py.html">search/tests/tests_models.py</a></td>
-                <td>21</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="21 21">100%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_tests_tests_urls_py.html">search/tests/tests_urls.py</a></td>
-                <td>27</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="27 27">100%</td>
-            </tr>
-            <tr class="file">
-                <td class="name left"><a href="search_tests_tests_views_py.html">search/tests/tests_views.py</a></td>
-                <td>48</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="48 48">100%</td>
+                <td class="right" data-ratio="51 61">84%</td>
             </tr>
             <tr class="file">
                 <td class="name left"><a href="search_urls_py.html">search/urls.py</a></td>
                 <td>6</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="6 6">100%</td>
@@ -162,7 +124,9 @@
                 <td>129</td>
                 <td>44</td>
                 <td>0</td>
-                <td class="right" data-ratio="85 129">66%</td>
+                <td>32</td>
+                <td>7</td>
+                <td class="right" data-ratio="96 161">60%</td>
             </tr>
         </tbody>
     </table>
@@ -174,7 +138,7 @@
     <div class="content">
         <p>
             <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.3</a>,
-            created at 2020-11-29 00:04 +0100
+            created at 2020-12-13 01:22 +0100
         </p>
     </div>
 </div>

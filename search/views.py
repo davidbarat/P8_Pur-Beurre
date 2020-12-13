@@ -23,7 +23,6 @@ def search(request):
     template = loader.get_template("search/form.html")
     return HttpResponse(template.render(request=request))
 
-
 # @login_required()
 def searching(request):
     query = request.GET.get("query")

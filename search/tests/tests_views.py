@@ -61,6 +61,10 @@ class ViewsTest(TestCase):
         response = self.client.login(username="test3@test.te", password="test123")
         self.assertEqual(response, True)
 
+    def test_logout2(self):
+        url = self.client.get(reverse("index"))
+        self.assertEqual(url.status_code, 200)
+
     def test_register(self):
         request = self.factory.get("/search/")
         request.user = self.user

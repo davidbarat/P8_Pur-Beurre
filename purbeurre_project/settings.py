@@ -14,6 +14,18 @@ import os
 from pathlib import Path
 
 import django_heroku
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://bf70c56efba947b2ad2f73d976713cfc@o488761.ingest.sentry.io/5549713",
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 
 # Activate Django-Heroku
 # django_heroku.settings(locals())
