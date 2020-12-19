@@ -45,11 +45,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", '7rxo>\r#"qi)y<mD`.X3\\^\x0c<k')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-if os.environ.get("ENV") == "PRODUCTION":
-    DEBUG = False
-
-
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","104.248.130.213"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
 
 # Application definition
 
@@ -166,6 +162,3 @@ INTERNAL_IPS = [
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/static/"
 STATIC_ROOT = str(BASE_DIR / 'staticfiles')
-
-if os.getenv("ENV") == "PRODUCTION":
-    django_heroku.settings(locals())
