@@ -1,4 +1,5 @@
 import json
+import logging
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
@@ -12,6 +13,7 @@ from django.urls import reverse
 from .forms import UserForm, RegisterForm
 from search.models import Product, Category, User, DetailProduct, Substitute
 
+logger = logging.getLogger(__name__)
 
 def index(request):
     template = loader.get_template("search/index.html")
@@ -34,6 +36,10 @@ def searching(request):
     product_query_data = ""
     product_query_json = {}
 
+    logger.info('New search', exc_info=True, extra={
+        'request': query,
+    })
+
     if not query:
         message = "Remplissez le champ de recherche"
     else:
@@ -52,6 +58,7 @@ def searching(request):
             message = (
                 "Le produit n'a pas été trouvé, veuillez effectuer une autre recherche"
             )
+            logger.info('Product not found', exc_info=True, extra={'request': query, }) 
 
     substitutes = Product.objects.filter(
         nutriscore_grade__lt=product_nutriscore
@@ -241,4 +248,5 @@ def save(request, id):
             + product_obj.product_name
         )
         context = {"message": message}
-        return render(request, "search/myproducts.html", context)
+        logger.error('Update Error', exc_info=True, extra={'request': query, }) 
+        return render(request,r"search/myproducts.html", context)

@@ -49,7 +49,7 @@ if os.environ.get("ENV") == "PRODUCTION":
     DEBUG = False
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","104.248.130.213"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","167.99.212.10"]
 
 # Application definition
 

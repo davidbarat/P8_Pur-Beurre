@@ -1,6 +1,14 @@
 from django.core.management.base import BaseCommand
 from search.models import Product, Category, DetailProduct
+from django.db import IntegrityError 
+from django.core.exceptions import MultipleObjectsReturned
 import requests
+import logging
+
+logging.basicConfig(
+        filename='/home/david/log/populate_db.log', 
+        format='%(asctime)s %(message)s', 
+        level=logging.DEBUG)
 
 
 class Command(BaseCommand):
@@ -27,35 +35,53 @@ class Command(BaseCommand):
         print(list_product[-4:])
 
         for self.element in list_product:
-            print(self.element)
-            print(self.element[0])
+            # print(self.element)
+            logging.info(self.element)
+            logging.info(self.element[0])
+            # print(self.element[0])
             # for self.unique in self.element:
             category = Category.objects.get(id=self.element[1])
-            product, _ = Product.objects.get_or_create(
-                barcode=self.element[0],
-                product_name=self.element[2],
-                resume=self.element[3],
-                nutriscore_grade=self.element[4],
-                picture_path=self.element[5],
-                url=self.element[6],
-                small_picture_path=self.element[7],
-                category=category,
-            )
-            product.save()
+            try:  
+                product, created = Product.objects.get_or_create(
+                        barcode=self.element[0],
+                        product_name=self.element[2],
+                        resume=self.element[3],
+                        nutriscore_grade=self.element[4],
+                        picture_path=self.element[5],
+                        url=self.element[6],
+                        small_picture_path=self.element[7],
+                        category=category,
+                    )  
+                if created:
+                    product.save()
+            except IntegrityError: 
+                print(IntegrityError)
+            except MultipleObjectsReturned:
+                print(MultipleObjectsReturned)
+            except Exception as e:
+                raise e
 
-            detail_product, _ = DetailProduct.objects.get_or_create(
-                id=product,
-                energy_100g=self.element[8],
-                energy_unit=self.element[9],
-                proteins_100g=self.element[10],
-                fat_100g=self.element[11],
-                saturated_fat_100g=self.element[12],
-                carbohydrates_100g=self.element[13],
-                sugars_100g=self.element[14],
-                fiber_100g=self.element[15],
-                salt_100g=self.element[16],
-            )
-            detail_product.save()
+            try:
+                detail_product, created = DetailProduct.objects.get_or_create(
+                        id=product,
+                        energy_100g=self.element[8],
+                        energy_unit=self.element[9],
+                        proteins_100g=self.element[10],
+                        fat_100g=self.element[11],
+                        saturated_fat_100g=self.element[12],
+                        carbohydrates_100g=self.element[13],
+                        sugars_100g=self.element[14],
+                        fiber_100g=self.element[15],
+                        salt_100g=self.element[16],
+                    )
+                if created:
+                    detail_product.save()
+            except IntegrityError:
+                print(IntegrityError)
+            except MultipleObjectsReturned:
+                print(MultipleObjectsReturned)
+            except Exception as e:
+                raise e
 
     def handle(self, *args, **options):
 
@@ -71,6 +97,7 @@ class Command(BaseCommand):
                 "json": 1,
             }
             print("Get Data from Api Category :" + " " + self.category)
+            logging.info("Get Data from Api Category :" + " " + self.category)
 
             for c in range(1, 6, 1):  # 5 pages
                 self.payload["page"] = c
