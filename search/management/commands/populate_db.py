@@ -2,14 +2,20 @@ from django.core.management.base import BaseCommand
 from search.models import Product, Category, DetailProduct
 from django.db import IntegrityError 
 from django.core.exceptions import MultipleObjectsReturned
+from logging.handlers import RotatingFileHandler
+from logging import handlers
 import requests
 import logging
 
-logging.basicConfig(
-        filename='/home/david/log/populate_db.log', 
-        format='%(asctime)s %(message)s', 
-        level=logging.DEBUG)
 
+logger = logging.getLogger("Rotating Log")
+logger.setLevel(logging.DEBUG)
+    
+handler = RotatingFileHandler(
+        '/home/david/log/populate_db.log', 
+        maxBytes=2000, 
+        backupCount=5)
+logger.addHandler(handler)
 
 class Command(BaseCommand):
     help = "Populate DB from api Open Food Facts"
@@ -36,8 +42,8 @@ class Command(BaseCommand):
 
         for self.element in list_product:
             # print(self.element)
-            logging.info(self.element)
-            logging.info(self.element[0])
+            logger.info(self.element)
+            logger.info(self.element[0])
             # print(self.element[0])
             # for self.unique in self.element:
             category = Category.objects.get(id=self.element[1])
@@ -97,7 +103,7 @@ class Command(BaseCommand):
                 "json": 1,
             }
             print("Get Data from Api Category :" + " " + self.category)
-            logging.info("Get Data from Api Category :" + " " + self.category)
+            logger.info("Get Data from Api Category :" + " " + self.category)
 
             for c in range(1, 6, 1):  # 5 pages
                 self.payload["page"] = c
