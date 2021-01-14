@@ -10,7 +10,8 @@ from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from logging import handlers, RotatingFileHandler
+from logging import handlers
+from logging.handlers import RotatingFileHandler
 from .forms import UserForm, RegisterForm
 from search.models import Product, Category, User, DetailProduct, Substitute
 
