@@ -4,15 +4,19 @@ from django.db import IntegrityError
 from django.core.exceptions import MultipleObjectsReturned
 from logging.handlers import RotatingFileHandler
 from logging import handlers
+from configparser import ConfigParser
 import requests
 import logging
 
+parser = ConfigParser() 
+parser.read('/home/david/conf/configuration.ini')
+path = parser.get('settings', 'log_path')
 
 logger = logging.getLogger("Rotating Log")
 logger.setLevel(logging.DEBUG)
     
 handler = RotatingFileHandler(
-        '/home/david/log/populate_db.log', 
+        path + 'populate_db.log',
         maxBytes=2000, 
         backupCount=5)
 logger.addHandler(handler)
