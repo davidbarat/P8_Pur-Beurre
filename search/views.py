@@ -1,4 +1,5 @@
 import json
+import os
 import logging
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -12,15 +13,21 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from logging import handlers
 from logging.handlers import RotatingFileHandler
+from os import environ
 from .forms import UserForm, RegisterForm
 from search.models import Product, Category, User, DetailProduct, Substitute
 
 
+if "log_path_django" in os.environ:
+    log_path = os.environ.get('log_path_django')
+else:
+    log_path = '/home/david/log/'
+
 logger = logging.getLogger("Rotating Log")
 logger.setLevel(logging.DEBUG)
     
-handler = RotatingFileHandler(
-        '/home/david/log/not-found-products.log', 
+handler = RotatingFileHandler(log_path
+        + 'not-found-products.log', 
         maxBytes=2000, 
         backupCount=5)
 logger.addHandler(handler)

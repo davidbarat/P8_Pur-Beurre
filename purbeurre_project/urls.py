@@ -18,7 +18,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
-
+from django.contrib.auth import views as auth_views
+from .views import PasswordsChangeView
 from search import views
 
 
@@ -26,12 +27,13 @@ def trigger_error(request):
     division_by_zero = 1 / 0
 
 urlpatterns = [
-    url(r"^$", views.index),
+    url(r"^$", views.index, name='index'),
     path("mentions/", include("search.urls")),
     url(r"^search/", include("search.urls")),
     url(r"^admin/", admin.site.urls),
     url(r"^register/$", views.register, name="register"),
     url(r"^accounts/", include("django.contrib.auth.urls"), name="login"),
+    url(r"^password/", PasswordsChangeView.as_view(template_name="registration/change-password.html"), name='password'),
     path('sentry-debug/', trigger_error),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     

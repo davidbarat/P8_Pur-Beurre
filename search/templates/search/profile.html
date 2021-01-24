@@ -11,6 +11,9 @@
 <div class="container col-lg-8 bg-white text-black text-center">
     {% if user.is_authenticated %}
     <h2>Votre adresse email : {{ user.email }}</h2>
+    <div class='small'>
+        <p><a href="{% url 'password' %}">Vous pouvez modifier votre mot de passe ici</a></p>
+    </div>
     {% else %}
     <h2><a href="{% url 'accounts/login' %}">Enregistrez-vous ou logguez vous</a></h2>
     {% endif %}
