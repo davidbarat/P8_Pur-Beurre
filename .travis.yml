@@ -5,8 +5,9 @@ services:
   - postgresql
 env:
   - DJANGO=3.1 DB=postgresql
-  - log_path_django=$HOME
+  - log_path_django=$HOME/
 before_script:
+  - touch $HOME/not-found-products.log
   - psql -U postgres -c "CREATE USER david WITH PASSWORD 'test';" -U postgres
   - psql -U postgres -c "ALTER ROLE david CREATEDB;" -U postgres
   - psql -U postgres -c "ALTER ROLE david superuser;" -U postgres
