@@ -70,6 +70,28 @@ class purBeurreTest(unittest.TestCase):
         self.elem.send_keys(Keys.RETURN)
         time.sleep(5)
 
+    def testChangePassword(self):
+        self.driver.maximize_window()
+        self.driver.get(self.url)
+        time.sleep(5)
+        self.elem = self.driver.find_element_by_id("login")
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(5)
+        self.elem = self.driver.find_element_by_id("id_username")
+        self.elem.send_keys(self.user)
+        self.elem = self.driver.find_element_by_id("id_password")
+        self.elem.send_keys(self.password)
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(5)
+        self.elem = self.driver.find_element_by_id("moncompte")
+        self.elem.send_keys(self.password)
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(3)
+        self.elem = self.driver.find_element_by_id("changepassword")
+        self.elem.send_keys(self.search)
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(3)
+
     def tearDown(self):
         self.driver.quit()
 
