@@ -134,7 +134,7 @@ class Command(BaseCommand):
 
         
         category = self.data["products"][0]["categories"].split(",")
-        # print(category)
+        print(category)
         cat, _ = Category.objects.get_or_create(category_name=category[0])
         cat.save()
         self.idx_category = Category.objects.get(category_name=cat)

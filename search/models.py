@@ -9,7 +9,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=30)
+    category_name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.category_name
