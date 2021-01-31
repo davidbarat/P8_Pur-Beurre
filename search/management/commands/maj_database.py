@@ -37,6 +37,7 @@ class Command(BaseCommand):
                 )  
             if created:
                 product_maj.save()
+                print('Following product is added to the database : ' + product[0][2])
         except IntegrityError: 
             print(IntegrityError)
         except MultipleObjectsReturned:
@@ -44,10 +45,9 @@ class Command(BaseCommand):
         except Exception as e:
             raise e
         try:
-            print(product)
+            # print(product)
             self.idx_product = Product.objects.get(product_name=product[0][2])
             print(self.idx_product)
-            print(self.idx_product.product_id)
             self.index = Product.objects.get(product_id=self.idx_product.product_id)
             detail_product, created = DetailProduct.objects.get_or_create(
                     id=self.index,
@@ -134,11 +134,11 @@ class Command(BaseCommand):
 
         
         category = self.data["products"][0]["categories"].split(",")
-        print(category)
+        # print(category)
         cat, _ = Category.objects.get_or_create(category_name=category[0])
         cat.save()
         self.idx_category = Category.objects.get(category_name=cat)
-        print(self.idx_category.id)
+        # print(self.idx_category.id)
 
         self.product.append(
             (
