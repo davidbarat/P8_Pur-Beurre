@@ -10,6 +10,7 @@ before_script:
   - mkdir geckodriver
   - tar -xzf geckodriver-v0.27.0-linux64.tar.gz -C geckodriver
   - export PATH=$PATH:$PWD/geckodriver
+  - pwd
   - touch $HOME/not-found-products.log
   - psql -U postgres -c "CREATE USER david WITH PASSWORD 'test';" -U postgres
   - psql -U postgres -c "ALTER ROLE david CREATEDB;" -U postgres
@@ -19,5 +20,6 @@ install:
   - pip install -r requirements.txt
 script:
   - coverage run --source=search ./manage.py test
+  - python ./search/tests/selenium_tests.py
 after_success:
   - bash <(curl -s https://codecov.io/bash)
