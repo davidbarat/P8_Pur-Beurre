@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from webdrivermanager import GeckoDriverManager
+# from webdrivermanager import GeckoDriverManager
 
 
 class purBeurreTest(unittest.TestCase):
@@ -20,17 +20,19 @@ class purBeurreTest(unittest.TestCase):
         else:
             self.BROWSERSTACK_URL = 'https://davidbarat1:FxhRcmmHYxhSpVrjeAWu@hub-cloud.browserstack.com/wd/hub'
             self.desired_cap = {
-                'os' : 'OS X',
-                'os_version' : 'High Sierra',
-                'browser' : 'Safari',
-                'browser_version' : '11.1',
-                'name' : "davidbarat1's First Test"
+                'os' : 'Windows',
+                'os_version' : '10',
+                'browser' : 'Chrome',
+                'browser_version' : '80',
+                'name' : "P8 Test"
                 }
             """self.driver = webdriver.Firefox(
                 "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/")"""
             self.driver = webdriver.Remote(
                 command_executor=self.BROWSERSTACK_URL,
                 desired_capabilities=self.desired_cap)
+            self.driver.maximize_window()
+
             self.url = "http://167.99.212.10/"
 
         self.search = "Nutella"
