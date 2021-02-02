@@ -1,0 +1,9 @@
+1612301171417	geckodriver	INFO	Listening on 127.0.0.1:64712
+1612301174195	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/j4/0lyj_5015w9f6sk758wq0kgc0000gn/T/rust_mozprofileduiFOo"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 422))
+JavaScript error: resource:///modules/BrowserGlue.jsm, line 4614: TypeError: win is null
+1612301190803	Marionette	INFO	Listening on port 64723
+Exiting due to channel error.
+Exiting due to channel error.

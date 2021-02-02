@@ -22,6 +22,6 @@ install:
   - pip install -r requirements.txt
 script:
   - coverage run --source=search ./manage.py test
-  - python ./search/tests/selenium_tests.py
+  - python ./search/tests/selenium_tests.py -v
 after_success:
   - bash <(curl -s https://codecov.io/bash)

@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from webdrivermanager import GeckoDriverManager
 
 
 class purBeurreTest(unittest.TestCase):
@@ -15,8 +16,12 @@ class purBeurreTest(unittest.TestCase):
             self.driver = webdriver.Firefox("/Users/david/Projets/selenium driver/")
             self.url = "http://127.0.0.1:8000/"
         else:
+            """
             self.driver = webdriver.Firefox(
-                "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/geckodriver")
+                "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/")
+            """
+            self.driver = GeckoDriverManager()
+            self.driver.download_and_install()
             self.url = "http://167.99.212.10/"
         self.search = "Nutella"
         self.user = "test@test.com"
