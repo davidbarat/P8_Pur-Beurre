@@ -15,7 +15,8 @@ class purBeurreTest(unittest.TestCase):
             self.driver = webdriver.Firefox("/Users/david/Projets/selenium driver/")
             self.url = "http://127.0.0.1:8000/"
         else:
-            self.driver = webdriver.Firefox("/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver")
+            self.driver = webdriver.Firefox(
+                "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/geckodriver")
             self.url = "http://167.99.212.10/"
         self.search = "Nutella"
         self.user = "test@test.com"
