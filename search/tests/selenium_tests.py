@@ -18,12 +18,11 @@ class purBeurreTest(unittest.TestCase):
             self.driver.maximize_window()
 
         else:
-            """
+            
+            self.ggd = GeckoDriverManager()
+            self.ggd.download_and_install()
             self.driver = webdriver.Firefox(
                 "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/")
-            """
-            self.driver = GeckoDriverManager()
-            self.driver.download_and_install()
             self.url = "http://167.99.212.10/"
         self.search = "Nutella"
         self.user = "test@test.com"
