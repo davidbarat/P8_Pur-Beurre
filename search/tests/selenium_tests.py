@@ -18,12 +18,13 @@ class purBeurreTest(unittest.TestCase):
             self.driver.maximize_window()
 
         else:
-            
             self.ggd = GeckoDriverManager()
             self.ggd.download_and_install()
             self.driver = webdriver.Firefox(
                 "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/")
-            self.url = "http://167.99.212.10/"
+            # self.url = "http://167.99.212.10/"
+            self.url = "http://127.0.0.1:8000/"
+
         self.search = "Nutella"
         self.user = "test@test.com"
         self.password = "password"
@@ -128,8 +129,7 @@ class purBeurreTest(unittest.TestCase):
         time.sleep(3)
 
     def tearDown(self):
-        if os.environ.get("ENV") == "DEV":
-            self.driver.quit()
+        self.driver.quit()
 
 
 if __name__ == "__main__":
