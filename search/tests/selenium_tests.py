@@ -15,6 +15,8 @@ class purBeurreTest(unittest.TestCase):
         if os.environ.get("ENV") == "DEV":
             self.driver = webdriver.Firefox("/Users/david/Projets/selenium driver/")
             self.url = "http://127.0.0.1:8000/"
+            self.driver.maximize_window()
+
         else:
             """
             self.driver = webdriver.Firefox(
@@ -29,7 +31,6 @@ class purBeurreTest(unittest.TestCase):
         self.newpassword = "newpassword"
 
     def testSearchPurbeurre(self):
-        self.driver.maximize_window()
         self.driver.get(self.url)
         time.sleep(5)
         self.elem = self.driver.find_element_by_id("login")
@@ -53,7 +54,7 @@ class purBeurreTest(unittest.TestCase):
         time.sleep(5)
         
     def testMyProducts(self):
-        self.driver.maximize_window()
+        # self.driver.maximize_window()
         self.driver.get(self.url)
         self.elem = self.driver.find_element_by_id("myproducts")
         self.elem.send_keys(Keys.RETURN)
@@ -72,7 +73,7 @@ class purBeurreTest(unittest.TestCase):
         time.sleep(5)
 
     def testMentionsContacts(self):
-        self.driver.maximize_window()
+        # self.driver.maximize_window()
         self.driver.get(self.url)
         self.elem = self.driver.find_element_by_id("mentions")
         self.elem.send_keys(Keys.RETURN)
@@ -82,7 +83,7 @@ class purBeurreTest(unittest.TestCase):
         time.sleep(5)
 
     def testChangePassword(self):
-        self.driver.maximize_window()
+        # self.driver.maximize_window()
         self.driver.get(self.url)
         time.sleep(5)
         self.elem = self.driver.find_element_by_id("login")
@@ -128,7 +129,8 @@ class purBeurreTest(unittest.TestCase):
         time.sleep(3)
 
     def tearDown(self):
-        self.driver.quit()
+        if os.environ.get("ENV") == "DEV":
+            self.driver.quit()
 
 
 if __name__ == "__main__":
