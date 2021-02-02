@@ -18,12 +18,20 @@ class purBeurreTest(unittest.TestCase):
             self.driver.maximize_window()
 
         else:
-            self.ggd = GeckoDriverManager()
-            self.ggd.download_and_install()
-            self.driver = webdriver.Firefox(
-                "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/")
-            # self.url = "http://167.99.212.10/"
-            self.url = "http://127.0.0.1:8000/"
+            self.BROWSERSTACK_URL = 'https://davidbarat1:FxhRcmmHYxhSpVrjeAWu@hub-cloud.browserstack.com/wd/hub'
+            self.desired_cap = {
+                'os' : 'OS X',
+                'os_version' : 'High Sierra',
+                'browser' : 'Safari',
+                'browser_version' : '11.1',
+                'name' : "davidbarat1's First Test"
+                }
+            """self.driver = webdriver.Firefox(
+                "/home/travis/build/davidbarat/P8_Pur-Beurre/geckodriver/")"""
+            self.driver = webdriver.Remote(
+                command_executor=self.BROWSERSTACK_URL,
+                desired_capabilities=self.desired_cap)
+            self.url = "http://167.99.212.10/"
 
         self.search = "Nutella"
         self.user = "test@test.com"
