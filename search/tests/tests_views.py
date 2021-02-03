@@ -107,3 +107,16 @@ class ViewsTest(TestCase):
         self.client.login(username="test3@test.te", password="test123")
         url = self.client.get(reverse("myproducts"))
         self.assertEqual(url.status_code, 200)
+
+    def test_password_reset_ok(self):
+        self.client.login(username="test3@test.te", password="test123")
+        self.response = self.client.post('/password/',
+            {'old_password': 'test3@test.te',
+            'new_password1': 'test456',
+            'new_password2': 'test456'
+            }
+            )
+        # self.response = self.client.login(username="test3@test.te", password="test456")
+        self.assertEqual(self.response.status_code, 200)
+
+
