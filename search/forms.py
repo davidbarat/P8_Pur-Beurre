@@ -32,11 +32,6 @@ class RegisterForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
 
-    username = forms.CharField(
-        label="Nom d utilisateur",
-        max_length=30,
-        widget=forms.TextInput(attrs={"style": "color:black", "type": "text"}),
-    )
     email = forms.EmailField(
         label="Votre email",
         max_length=50,
