@@ -116,7 +116,6 @@ class ViewsTest(TestCase):
             'new_password2': 'test456'
             }
             )
-        # self.response = self.client.login(username="test3@test.te", password="test456")
         self.assertEqual(self.response.status_code, 200)
 
 

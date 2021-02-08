@@ -19,8 +19,11 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from .views import PasswordsChangeView
 from search import views
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 
 def trigger_error(request):
@@ -34,6 +37,10 @@ urlpatterns = [
     url(r"^register/$", views.register, name="register"),
     url(r"^accounts/", include("django.contrib.auth.urls"), name="login"),
     url(r"^password/", PasswordsChangeView.as_view(template_name="registration/change-password.html"), name='password'),
+    url(r"^password_reset/", PasswordResetView.as_view(template_name='search/password_reset_form.html'), name='password_reset'),
+    url(r"^password_reset/", PasswordResetDoneView.as_view(template_name='search/password_reset_done.html'), name='password_reset_done'),
+    url(r"^password_reset/", PasswordResetConfirmView.as_view(template_name='search/password_reset_confirm.html'), name='password_reset_confirm'),
+    url(r"^password_reset/", PasswordResetCompleteView.as_view(template_name='search/password_reset_comlete.html'), name='password_reset_complete'),
     path('sentry-debug/', trigger_error),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     

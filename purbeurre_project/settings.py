@@ -43,25 +43,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", '7rxo>\r#"qi)y<mD`.X3\\^\x0c<k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if os.environ.get("ENV") == "PRODUCTION":
     DEBUG = False
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","167.99.212.10"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","167.99.212.10","smtp.gmail.com"]
 
 # Application definition
 
 INSTALLED_APPS = [
+    "search.apps.SearchConfig",
     "django.contrib.admin",
-    "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "debug_toolbar",
-    "search.apps.SearchConfig",
+    "django.contrib.auth",
 ]
 
 MIDDLEWARE = [
@@ -118,7 +118,23 @@ DATABASES = {
 }
 
 AUTHENTICATION_BACKENDS = ["search.models.EmailBackend"]
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'contact.purbeurre@gmail.com'
+EMAIL_HOST_PASSWORD = 'PurP8@contact'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = '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'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'contact@purbeurre.com'
+
+# DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
