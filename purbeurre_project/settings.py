@@ -119,20 +119,20 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = ["search.models.EmailBackend"]
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'contact.purbeurre@gmail.com'
-EMAIL_HOST_PASSWORD = 'PurP8@contact'
-
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = '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'
-# EMAIL_PORT = 587
+# EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = 'contact@purbeurre.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'contact.purbeurre@gmail.com'
+# EMAIL_HOST_PASSWORD = 'PurP8@contact'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'contact@purbeurre.com'
 
 # DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
 
