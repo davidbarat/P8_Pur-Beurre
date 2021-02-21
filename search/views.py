@@ -263,3 +263,5 @@ def save(request, id):
         )
         context = {"message": message}
         return render(request, "search/myproducts.html", context)
+
+

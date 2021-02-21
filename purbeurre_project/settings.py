@@ -43,11 +43,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", '7rxo>\r#"qi)y<mD`.X3\\^\x0c<k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if os.environ.get("ENV") == "PRODUCTION":
     DEBUG = False
-
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","167.99.212.10","smtp.gmail.com"]
 
@@ -83,7 +82,7 @@ ROOT_URLCONF = "purbeurre_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR,"templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -120,19 +119,20 @@ DATABASES = {
 AUTHENTICATION_BACKENDS = ["search.models.EmailBackend"]
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'contact.purbeurre@gmail.com'
-# EMAIL_HOST_PASSWORD = 'PurP8@contact'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'contact@purbeurre.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'contact.purbeurre@gmail.com'
+EMAIL_HOST_PASSWORD = 'PurP8@contact'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = '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'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'contact@purbeurre.com'
 
 # DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
 

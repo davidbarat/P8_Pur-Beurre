@@ -12,7 +12,10 @@
     {% if user.is_authenticated %}
     <h2>Votre adresse email : {{ user.email }}</h2>
     <div class='small'>
+        <!--
+        <a href="/password_reset" id="resetpassword">Mot de passe oublié ?</a>
         <p><a href="{% url 'password' %}" id="changepassword">Vous pouvez modifier votre mot de passe ici</a></p>
+        -->
     </div>
     {% else %}
     <h2><a href="{% url 'accounts/login' %}">Enregistrez-vous ou logguez vous</a></h2>

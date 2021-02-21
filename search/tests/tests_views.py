@@ -1,13 +1,30 @@
+import re
 from django.test import RequestFactory, TestCase, Client
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 from django.contrib.auth.models import AnonymousUser, User
-
+from django.core import mail
+from django.test.utils import override_settings
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.contrib.auth import authenticate
 from search.views import searching, register
 from search.models import Product, Category, DetailProduct, Substitute
 from search.forms import RegisterForm, UserForm
 from .tests_models import ModelTest
 
-# Create your tests here.
+def password_reset_confirm_url(uidb64, token):
+        try:
+            print(reverse("password_reset_confirm", args=(uidb64, token)))
+            return reverse("password_reset_confirm", args=(uidb64, token))
+        except NoReverseMatch:
+            return f"/accounts/reset/invaliduidb64/invalid-token/"
+
+def utils_extract_reset_tokens(full_url):
+    return re.findall(
+        'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', 
+        full_url)
+
 class ViewsTest(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -108,7 +125,7 @@ class ViewsTest(TestCase):
         url = self.client.get(reverse("myproducts"))
         self.assertEqual(url.status_code, 200)
 
-    def test_password_reset_ok(self):
+    def test_update_password(self):
         self.client.login(username="test3@test.te", password="test123")
         self.response = self.client.post('/password/',
             {'old_password': 'test3@test.te',
@@ -118,4 +135,45 @@ class ViewsTest(TestCase):
             )
         self.assertEqual(self.response.status_code, 200)
 
+# @override_settings(EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend')
+class DefaultEmailTestCase(TestCase):
+    
+    @classmethod
+    def setUpTestData(cls):
+        cls.factory = RequestFactory()
+        cls.user = User.objects.create_user(
+            email="test3@test.te",
+            password="test123",
+            first_name="Test",
+            last_name="test",
+            username="Tester",
+        )
+        cls.user.save()
 
+    def test_password_reset(self):
+        self.client.post(
+            '/password_reset',
+            {"email": "test3@test.te"},
+            follow=True)
+        
+        self.assertEqual(len(mail.outbox), 1)
+
+        msg = mail.outbox[0]
+        # print(mail.outbox[0].body)
+        url = utils_extract_reset_tokens(msg.body)
+        self.extract_url = url[0]
+        self.uidb64 = self.extract_url.split('/')[4]
+        self.token = self.extract_url.split('/')[5]
+        
+        self.response = self.client.get(
+            password_reset_confirm_url(self.uidb64, self.token), 
+            follow=True)
+        
+        self.assertEqual(self.response.status_code, 200)
+
+        self.response = self.client.post(password_reset_confirm_url(self.uidb64, "set-password"),
+                                      {"new_password1": 'test456',
+                                       "new_password2": 'test456'},
+                                      follow=True)
+
+        self.assertIsNone(authenticate(email='test3@test.te',password='test123'))
