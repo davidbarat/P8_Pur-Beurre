@@ -152,7 +152,7 @@ class DefaultEmailTestCase(TestCase):
 
     def test_password_reset(self):
         self.client.post(
-            '/password_reset',
+            '/password_reset/',
             {"email": "test3@test.te"},
             follow=True)
         
