@@ -37,6 +37,7 @@ class Command(BaseCommand):
             self.driver = webdriver.Firefox("/Users/david/Projets/selenium driver/")
             self.url = "http://127.0.0.1:8000/"
             self.driver.maximize_window()
+            
 
         else:
             self.BROWSERSTACK_URL = 'https://davidbarat1:FxhRcmmHYxhSpVrjeAWu@hub-cloud.browserstack.com/wd/hub'
@@ -58,15 +59,12 @@ class Command(BaseCommand):
         self.user = "test@test.com"
         self.password = "007Test!"
         self.newpassword = "newpassword456"
-        self.mailtrap = '1dd21617c6-94031c@inbox.mailtrap.io'
-        self.apikey = 'af525dcfe5f912d634cca848ee2921d4'
-        self.inboxid = '1222935'
-        self.urlmail = "https://mailtrap.io/api/v1/"
-        self.payload = {"api_token" : self.apikey}
     
-
     def handle(self, *args, **options):
-        self.testResetPassword()
+        self.testMyProducts()
+        self.testMentionsContacts()
+        # self.testResetPassword()
+        self.tearDown()
 
     def testResetPassword(self):
         # self.driver.maximize_window()
@@ -106,11 +104,33 @@ class Command(BaseCommand):
         self.driver.find_element_by_id("id_new_password2").send_keys(self.newpassword)
         self.elem = self.driver.find_element_by_id("id_new_password2")
         time.sleep(3)
-        # self.driver.find_element_by_name("button").submit()
         self.elem.send_keys(Keys.RETURN)
         time.sleep(3)
         self.driver.quit()
 
+    def testMyProducts(self):
+        # self.driver.maximize_window()
+        self.driver.get(self.url)
+        self.elem = self.driver.find_element_by_id("myproducts")
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(5)
+        self.elem = self.driver.find_element_by_id("id_username")
+        self.elem.send_keys(self.user)
+        self.elem = self.driver.find_element_by_id("id_password")
+        self.elem.send_keys(self.password)
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(5)
 
+    def testMentionsContacts(self):
+        # self.driver.maximize_window()
+        self.driver.get(self.url)
+        self.elem = self.driver.find_element_by_id("mentions")
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(5)
+        self.elem = self.driver.find_element_by_id("contact")
+        self.elem.send_keys(Keys.RETURN)
+        time.sleep(5)
 
+    def tearDown(self):
+        self.driver.quit()
     
