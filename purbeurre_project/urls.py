@@ -40,7 +40,7 @@ urlpatterns = [
         r"^password/", 
         PasswordsChangeView.as_view(template_name="registration/change-password.html"), 
         name='password'),
-    path("password_reset", password_reset_request, name="password_reset"),
+    path("password_reset/", password_reset_request, name="password_reset"),
     # url(r"^password_reset/", views.password_reset_request(template_name='search/password_reset_form.html'), name='password_reset'),
     # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="search/password_reset_confirm.html"), name='password_reset_confirm'),
     path(

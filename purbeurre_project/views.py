@@ -1,3 +1,4 @@
+import os
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.forms import PasswordChangeForm
@@ -25,6 +26,10 @@ def index(request):
     return HttpResponse(template.render(request=request))
 
 def password_reset_request(request):
+	if os.environ.get("ENV") == "PRODUCTION":
+		domain = "167.99.212.10/reset"
+	else:
+		domain = '127.0.0.1:8000/reset'
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)
 		if password_reset_form.is_valid():
@@ -36,7 +41,7 @@ def password_reset_request(request):
 					email_template_name = "search/password_reset_email.html"
 					c = {
 					"email":user.email,
-					'domain':'127.0.0.1:8000/reset',
+					'domain': domain,
 					'site_name': 'Purbeurre',
 					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
 					"user": user,
