@@ -26,10 +26,11 @@ def index(request):
     return HttpResponse(template.render(request=request))
 
 def password_reset_request(request):
-	if os.environ['ENV'] == "PRODUCTION":
-		domain = "167.99.212.10/reset"
-	else:
+	if os.environ['ENV'] == "DEV":
 		domain = '127.0.0.1:8000/reset'
+
+	else:
+		domain = "167.99.212.10/reset"
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)
 		if password_reset_form.is_valid():
