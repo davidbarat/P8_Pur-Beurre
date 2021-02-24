@@ -37,10 +37,9 @@ class Command(BaseCommand):
             self.driver = webdriver.Firefox("/Users/david/Projets/selenium driver/")
             self.url = "http://127.0.0.1:8000/"
             self.driver.maximize_window()
-            
 
-        else:
-            self.BROWSERSTACK_URL = 'https://davidbarat1:FxhRcmmHYxhSpVrjeAWu@hub-cloud.browserstack.com/wd/hub'
+        if os.environ.get("ENV") == "TRAVIS":
+                self.BROWSERSTACK_URL = 'https://davidbarat1:FxhRcmmHYxhSpVrjeAWu@hub-cloud.browserstack.com/wd/hub'
             self.desired_cap = {
                 'os' : 'Windows',
                 'os_version' : '10',
@@ -52,7 +51,6 @@ class Command(BaseCommand):
                 command_executor=self.BROWSERSTACK_URL,
                 desired_capabilities=self.desired_cap)
             self.driver.maximize_window()
-
             self.url = "http://167.99.212.10/"
 
         self.search = "Nutella"

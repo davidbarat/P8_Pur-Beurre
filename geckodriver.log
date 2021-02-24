@@ -1,0 +1,9 @@
+1614203219426	geckodriver	INFO	Listening on 127.0.0.1:57755
+1614203223555	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/j4/0lyj_5015w9f6sk758wq0kgc0000gn/T/rust_mozprofilepnCzrG"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 422))
+1614203259090	Marionette	INFO	Listening on port 57768
+1614203259570	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614203260221	Marionette	ERROR	[19] No reply from Marionette:Register
+1614203295439	Marionette	INFO	Stopped listening on port 57768
