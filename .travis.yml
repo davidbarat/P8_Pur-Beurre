@@ -15,6 +15,7 @@ before_script:
   - psql -U postgres -c "ALTER ROLE david CREATEDB;" -U postgres
   - psql -U postgres -c "ALTER ROLE david superuser;" -U postgres
   - psql -U postgres -c "CREATE DATABASE dbtest;" -U postgres
+  - export ENV="DEV"
 install:
   - pip install -r requirements.txt
 script:
