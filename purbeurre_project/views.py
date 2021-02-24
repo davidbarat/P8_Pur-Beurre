@@ -26,9 +26,8 @@ def index(request):
     return HttpResponse(template.render(request=request))
 
 def password_reset_request(request):
-	if os.environ['ENV'] == "DEV":
+	if os.environ.get("ENV") == "DEV":
 		domain = '127.0.0.1:8000/reset'
-
 	else:
 		domain = "167.99.212.10/reset"
 	if request.method == "POST":
