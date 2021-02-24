@@ -39,7 +39,7 @@ class Command(BaseCommand):
             self.driver.maximize_window()
 
         if os.environ.get("ENV") == "TRAVIS":
-                self.BROWSERSTACK_URL = 'https://davidbarat1:FxhRcmmHYxhSpVrjeAWu@hub-cloud.browserstack.com/wd/hub'
+            self.BROWSERSTACK_URL = 'https://davidbarat1:FxhRcmmHYxhSpVrjeAWu@hub-cloud.browserstack.com/wd/hub'
             self.desired_cap = {
                 'os' : 'Windows',
                 'os_version' : '10',
