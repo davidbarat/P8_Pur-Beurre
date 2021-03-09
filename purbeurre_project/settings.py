@@ -21,10 +21,9 @@ sentry_sdk.init(
     dsn="https://bf70c56efba947b2ad2f73d976713cfc@o488761.ingest.sentry.io/5549713",
     integrations=[DjangoIntegration()],
     traces_sample_rate=1.0,
-
     # If you wish to associate users to errors (assuming you are using
     # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
+    send_default_pii=True,
 )
 
 # Activate Django-Heroku
@@ -48,12 +47,19 @@ DEBUG = True
 if os.environ.get("ENV") == "PRODUCTION":
     DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","167.99.212.10","smtp.gmail.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    ".herokuapp.com",
+    "167.99.212.10",
+    "smtp.gmail.com",
+]
 
 # Application definition
 
 INSTALLED_APPS = [
     "search.apps.SearchConfig",
+    "autocomplete.apps.AutocompleteConfig",
     "django.contrib.admin",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -82,7 +88,7 @@ ROOT_URLCONF = "purbeurre_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR,"templates")],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -185,3 +191,7 @@ STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
 if os.getenv("ENV") == "PRODUCTION":
     django_heroku.settings(locals())
+
+AUTOCOMPLETE_MODEL = 'search.Product'
+AUTOCOMPLETE_SEARCH_FIELD = 'product_name'
+AUTOCOMPLETE_ORDER_FIELDS = ['-nutriscore_grade']

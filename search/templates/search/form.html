@@ -5,7 +5,7 @@
             {# if user.is_authenticated #}
             <div class="col-md-6">
                 <form class="input-group" action="{% url 'search' %}" method="get" accept-charset="utf-8">
-                    <input id="searchForm" class="form-control" name="query"
+                    <input id="searchForm" class="form-control autocomplete" name="query"
                         placeholder="Rechercher un produit bien gras">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit" id="searchbar">Remplacer</button>
