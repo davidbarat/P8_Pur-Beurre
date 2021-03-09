@@ -50,14 +50,15 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
 # Application definition
 
 INSTALLED_APPS = [
+    "search.apps.SearchConfig",
+    "autocomplete.apps.AutocompleteConfig",
     "django.contrib.admin",
-    "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "debug_toolbar",
-    "search.apps.SearchConfig",
+    "django.contrib.auth",
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,7 @@ INTERNAL_IPS = [
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/static/"
 STATIC_ROOT = str(BASE_DIR / 'staticfiles')
+
+AUTOCOMPLETE_MODEL = 'search.Product'
+AUTOCOMPLETE_SEARCH_FIELD = 'product_name'
+AUTOCOMPLETE_ORDER_FIELDS = ['-nutriscore_grade']

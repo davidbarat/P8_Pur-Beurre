@@ -22,5 +22,6 @@ class AutocompleteView(View):
             search = {f'{search_field}__icontains': term}
             items = model.objects.filter(**search).order_by(*order_fields)
             items = [getattr(item, search_field) for item in items]
-            return JsonResponse(items, safe=False)
+            items_uniq = [*{*items}]
+            return JsonResponse(items_uniq, safe=False)
         return JsonResponse([], safe=False)

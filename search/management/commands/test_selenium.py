@@ -59,9 +59,9 @@ class Command(BaseCommand):
         self.newpassword = "newpassword456"
     
     def handle(self, *args, **options):
-        self.testMyProducts()
         self.testMentionsContacts()
-        # self.testResetPassword()
+        self.testMyProducts()
+        self.testResetPassword()
         self.tearDown()
 
     def testResetPassword(self):

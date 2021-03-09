@@ -7,3 +7,28 @@ console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "res
 1614203259570	Marionette	WARN	TLS certificate errors will be ignored for this session
 1614203260221	Marionette	ERROR	[19] No reply from Marionette:Register
 1614203295439	Marionette	INFO	Stopped listening on port 57768
+1614893258061	geckodriver	INFO	Listening on 127.0.0.1:50823
+1614893261335	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/j4/0lyj_5015w9f6sk758wq0kgc0000gn/T/rust_mozprofileh938zv"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 422))
+1614893281620	Marionette	INFO	Listening on port 50836
+1614893281785	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614893311164	Marionette	INFO	Stopped listening on port 50836
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1615278227963	geckodriver	INFO	Listening on 127.0.0.1:57243
+1615278230941	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/j4/0lyj_5015w9f6sk758wq0kgc0000gn/T/rust_mozprofilera2UUt"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 422))
+1615278251832	Marionette	INFO	Listening on port 57254
+1615278252369	Marionette	WARN	TLS certificate errors will be ignored for this session
+1615278750042	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 422))
+1615287656690	Marionette	INFO	Stopped listening on port 57254
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
